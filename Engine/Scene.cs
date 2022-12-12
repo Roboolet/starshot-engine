@@ -1,0 +1,64 @@
+﻿using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace StarshotEngine
+{
+    public class Scene
+    {
+        public readonly string name;
+        public SceneCamera camera;
+
+        public Scene()
+        {
+            camera = new SceneCamera();
+        }
+
+        public void Initialize(string JSONsource)
+        {
+
+        }
+
+        public void Update(GameTime gameTime)
+        {
+
+        }
+        public void Draw(GameTime gameTime)
+        {
+
+        }
+
+        /// <summary>
+        /// Create a new instance of the given SceneObject
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="position"></param>
+        /// <param name="parent"></param>
+        /// <returns></returns>
+        public SceneObject CreateSceneObject(SceneObject source, Vector3 position, SceneObject parent = null)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Returns the first SceneObject in the scene hierarchy that matches the query
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public SceneObject Find(string query, SceneObject searchOrigin = null, FindMode findMode = FindMode.Exact)
+        {
+            return null;
+        }
+        /// <summary>
+        /// Returns all SceneObjects in the scene that match the query
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public SceneObject[] FindAll(string query, SceneObject searchOrigin = null, FindMode findMode = FindMode.Exact)
+        {
+            return null;
+        }
+        public enum FindMode{Exact, StartsWith, Contains}
+    }
+}
