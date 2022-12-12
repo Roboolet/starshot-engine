@@ -7,26 +7,34 @@ namespace StarshotEngine
 {
     public class Scene
     {
+        public readonly string fileName;
         public readonly string name;
         public SceneCamera camera;
 
-        public Scene()
+        List<SceneObject> hierarchy;
+
+        public Scene(string sourceFileJSON)
+        {
+            fileName = sourceFileJSON;
+        }
+
+        public void Populate()
         {
             camera = new SceneCamera();
         }
 
-        public void Initialize(string JSONsource)
-        {
-
-        }
-
         public void Update(GameTime gameTime)
         {
-
+            for(int i =0; i < hierarchy.Count; i++)
+            {
+                SceneObject obj = hierarchy[i];
+                if(obj.Enabled) obj.Update(gameTime);
+            }
         }
+
         public void Draw(GameTime gameTime)
         {
-
+            // TODO: draw all Renderers within the hierarchy
         }
 
         /// <summary>
