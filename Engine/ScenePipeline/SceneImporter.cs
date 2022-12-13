@@ -9,5 +9,10 @@ namespace StarshotEngine.ScenePipeline
 {
     class SceneImporter : JsonContentTypeReader<SceneData>
     {
+        protected override SceneData Read(ContentReader reader, SceneData existingInstance)
+        {
+            Debug.WriteLine("Opening Scene file...");
+            return base.Read(reader, existingInstance);
+        }
     }
 }

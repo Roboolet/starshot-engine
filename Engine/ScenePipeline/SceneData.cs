@@ -10,22 +10,22 @@ namespace StarshotEngine.ScenePipeline
     public class SceneData
     {
         public string name;
-        public Vector3 camPosition;
+        public float[] camPosition;
         public float camRotation;
 
-        public List<SceneObjectData> objects;
+        public SceneObjectData[] objects;
     }
 
     [System.Serializable]
     public class SceneObjectData
     {
         public string name;
-        public Vector3 position;
+        public float[] position;
         public float rotation;
-        public Vector3 scale;
+        public float[] scale;
 
-        public List<SceneObjectComponentData> components;
-        public List<SceneObjectData> children;
+        public SceneObjectComponentData[] components;
+        public SceneObjectData[] children;
     }
 
     [System.Serializable]

@@ -19,10 +19,24 @@
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
-    <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Content\" />
     <Folder Include="$(MSBuildThisFileDirectory)SceneObjectComponent\" />
     <Folder Include="$(MSBuildThisFileDirectory)SceneObject\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\exampleScene.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\bin\Windows\exampleScene.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\.mgcontent" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\.mgstats" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\exampleScene.mgcontent" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\Windows\.mgcontent" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\Windows\.mgstats" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\Windows\exampleScene.mgcontent" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\exampleScene.json" />
   </ItemGroup>
 </Project>

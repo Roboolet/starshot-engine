@@ -1,20 +1,19 @@
 {
-    "scene":{
-        "name": "exampleScene",
-        "campositionition": [0,0,-10],
-        "camrotationation": 0,
-        "objects":[
-            {
-                "name": "parentObj",
-                "position": [0,1,0],
-                "rotation": 45,
-                "scale": [1,1,1],
-                "components": [
+    "name": "exampleScene",
+    "camPosition": [ 0, 0, -10 ],
+    "camRotation": 0,
+    "objects": [
+        {
+            "name": "parentObj",
+            "position": [ 0, 1, 0 ],
+            "rotation": 45,
+            "scale": [ 1, 1, 1 ],
+            "components": [
                 {
                     "type": "SpriteRenderer",
-                    "data":{
+                    "data": {
                         "v_spritePath": "Sprites/placeholder.png",
-                        "v_color": [1,1,1]
+                        "v_color": [ 1, 1, 1 ]
                     }
                 },
                 {
@@ -24,34 +23,36 @@
                         "v_isTrigger": false,
                         "v_radius": 10
                     }
-                }],
-                "children":[
+                }
+            ],
+            "children": [
                 {
                     "name": "childObj",
-                    "position": [0,1,0],
+                    "position": [ 0, 1, 0 ],
                     "rotation": 0,
-                    "scale": [1,1,1],
+                    "scale": [ 1, 1, 1 ],
                     "components": [],
-                    "children":[
-                    {
-                        "name": "grandChildObj",
-                        "position": [0,1,0],
-                        "rotation": 45,
-                        "scale": [1,1,1],
-                        "components": [],
-                        "children":[]
-                    }]
-                }]
-            },
-            {
-                "name": "otherObj",
-                "position": [2,-2,2],
-                "rotation": 0,
-                "scale": [1,1,1],
-                "components": [],
-                "children":[]
-            }
-            
-        ]
-    }
+                    "children": [
+                        {
+                            "name": "grandChildObj",
+                            "position": [ 0, 1, 0 ],
+                            "rotation": 45,
+                            "scale": [ 1, 1, 1 ],
+                            "components": [],
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "otherObj",
+            "position": [ 2, -2, 2 ],
+            "rotation": 0,
+            "scale": [ 1, 1, 1 ],
+            "components": [],
+            "children": []
+        }
+
+    ]
 }

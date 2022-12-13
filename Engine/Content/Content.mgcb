@@ -17,6 +17,6 @@
 #begin exampleScene.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
-/processorParam:ContentType=StarshotEngine.ScenePipeline.SceneImporter, StarshotEngine
+/processorParam:ContentType=StarshotEngine.ScenePipeline.SceneImporter, ExampleProject
 /build:exampleScene.json
 
