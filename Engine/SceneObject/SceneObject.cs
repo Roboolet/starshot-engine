@@ -9,7 +9,7 @@ namespace StarshotEngine
     {
         public string name;
         public Vector2 position;
-        public Quaternion rotation;
+        public float zRotation;
         public Vector2 scale;
 
         protected List<ISceneObjectComponent> components;

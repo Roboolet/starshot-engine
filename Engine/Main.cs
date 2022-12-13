@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using StarshotEngine.ScenePipeline;
 
 namespace StarshotEngine
 {
@@ -32,21 +33,19 @@ namespace StarshotEngine
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            currentScene.Update(gameTime);
+            if(currentScene != null)currentScene.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
             base.Draw(gameTime);
-            currentScene.Draw(gameTime);
+            if (currentScene != null) currentScene.Draw(gameTime);
         }
 
         public Scene LoadScene(string name)

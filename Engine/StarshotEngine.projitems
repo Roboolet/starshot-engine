@@ -9,14 +9,20 @@
     <Import_RootNamespace>StarshotEngine</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)ISceneObjectComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneObjectComponent\ISceneObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Scene.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SceneCamera.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SceneObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScenePipeline\Scene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneObject\SceneCamera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneObject\SceneObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScenePipeline\SceneData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScenePipeline\SceneImporter.cs" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
     <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)SceneObjectComponent\" />
+    <Folder Include="$(MSBuildThisFileDirectory)SceneObject\" />
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StarshotEngine
+namespace StarshotEngine.ScenePipeline
 {
     public class Scene
     {
@@ -18,6 +18,9 @@ namespace StarshotEngine
             fileName = sourceFileJSON;
         }
 
+        /// <summary>
+        /// Fill in the scene using the data from the source file
+        /// </summary>
         public void Populate()
         {
             camera = new SceneCamera();
