@@ -7,26 +7,37 @@ namespace StarshotEngine.ScenePipeline
 {
     public class Scene
     {
-        public readonly string fileName;
         public readonly string name;
+        protected readonly SceneData source;
         public SceneCamera camera;
 
-        List<SceneObject> hierarchy;
+        List<SceneObject> hierarchy = new List<SceneObject>();
 
-        public Scene(string sourceFileJSON)
+        public Scene(SceneData _source)
         {
-            fileName = sourceFileJSON;
+            source = _source;
+            name = _source.name;
         }
 
         /// <summary>
         /// Fill in the scene using the data from the source file
         /// </summary>
-        public void Populate()
+        public virtual void Populate()
         {
+            // setup camera
             camera = new SceneCamera();
+            camera.position.X = source.camPosition[0];
+            camera.position.Y = source.camPosition[1];
+            camera.zRotation = source.camRotation;
+
+            // create SceneObjects and components
+            for(int i = 0; i < source.objects.Length; i++)
+            {
+                hierarchy.Add(new SceneObject(source.objects[i]));
+            }
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             for(int i =0; i < hierarchy.Count; i++)
             {
@@ -35,7 +46,7 @@ namespace StarshotEngine.ScenePipeline
             }
         }
 
-        public void Draw(GameTime gameTime)
+        public virtual void Draw(GameTime gameTime)
         {
             // TODO: draw all Renderers within the hierarchy
         }

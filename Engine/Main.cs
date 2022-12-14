@@ -35,12 +35,8 @@ namespace StarshotEngine
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            SceneData data = Content.Load<SceneData>("exampleScene");
-            Debug.WriteLine(data.name);
-            for (int i = 0; i < data.objects.Length; i++)
-            {
-                Debug.WriteLine(data.objects[i].name);
-            }
+            currentScene = new Scene(Content.Load<SceneData>("exampleScene"));
+            currentScene.Populate();
         }
 
         protected override void Update(GameTime gameTime)

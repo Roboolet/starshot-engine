@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using StarshotEngine.ScenePipeline;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace StarshotEngine
@@ -13,7 +15,7 @@ namespace StarshotEngine
         public Vector2 scale;
 
         protected List<ISceneObjectComponent> components;
-        public List<SceneObject> children;
+        protected List<SceneObject> children;
 
         public event EventHandler EnabledChanged;
 
@@ -33,6 +35,49 @@ namespace StarshotEngine
         public SceneObject(string _name = "NewObject")
         {
             name = _name;
+        }
+
+        /// <summary>
+        /// Create SceneObject from SceneData
+        /// </summary>
+        /// <param name=""></param>
+        public SceneObject(SceneObjectData data)
+        {
+            // set name
+            name = data.name;
+            Debug.WriteLine("Creating SceneObject: " + name);
+
+            // PRS
+            position.X = data.position[0];
+            position.Y = data.position[1];
+            zRotation = data.rotation;
+            scale.X = data.scale[0];
+            scale.Y = data.scale[1];
+
+            // create components
+            if (data.components != null)
+            {
+                components = new List<ISceneObjectComponent>();
+                for (int i = 0; i < data.components.Length; i++)
+                {
+                    // TODO: integrate ComponentLib
+                }
+            }
+
+            // create children
+            if (data.children != null)
+            {
+                children = new List<SceneObject>();
+                for (int i = 0; i < data.children.Length; i++)
+                {
+                    children.Add(new SceneObject(data.children[i]));
+                }
+            }
+        }
+
+        public void AddChild()
+        {
+            // should not allow a parent of this object to become a child, and vice versa
         }
 
         public void Destroy()
