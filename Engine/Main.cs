@@ -48,7 +48,7 @@ namespace StarshotEngine
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if(currentScene != null)currentScene.Update(gameTime);
+            if(currentScene != null) currentScene.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)

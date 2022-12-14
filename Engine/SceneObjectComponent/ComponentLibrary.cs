@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 using System.Diagnostics;
+using System.Linq;
 
 namespace StarshotEngine.SceneObjectComponent
 {
     public class ComponentLibrary
     {
 
-        static Dictionary<string, ISceneObjectComponent> dict;
+        static Dictionary<string, Type> dict;
         public static void Initialize()
         {
             Debug.WriteLine("Initializing ComponentLibrary...");
-            dict = new Dictionary<string, ISceneObjectComponent>();
+            dict = new Dictionary<string, Type>();
 
             // get all types in the current assembly
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
@@ -21,22 +22,22 @@ namespace StarshotEngine.SceneObjectComponent
             {
                 Type type = types[i];
                 // check if type is an implementation of ISceneObjectComponent
-                if(type.IsAssignableFrom(typeof(ISceneObjectComponent)) && !type.IsInterface)
+                if(!type.IsInterface && type.GetInterfaces().Contains(typeof(ISceneObjectComponent)))
                 {
-                    dict.Add(type.Name, (ISceneObjectComponent)type);
+                    dict.Add(type.Name, type);
                     Debug.WriteLine("Added component to library: " + type.Name);
                 }
                 Debug.WriteLine("Skipped component: " + type.Name);
             }
         }
 
-        public static ISceneObjectComponent GetComponentType(string className)
+        public static Type GetComponentType(string className)
         {
             if(dict != null)
             {
-                if(dict.TryGetValue(className, out ISceneObjectComponent comp))
+                if(dict.TryGetValue(className, out Type compType))
                 {
-                    return comp;
+                    return compType;
                 }
 
                 Debug.WriteLine("ComponentLibrary does not contain an entry for "+ className);

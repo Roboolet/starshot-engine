@@ -60,8 +60,8 @@ namespace StarshotEngine
                 for (int i = 0; i < data.components.Length; i++)
                 {
                     Debug.WriteLine("Adding component: " + data.components[i].type);
-                    ISceneObjectComponent comp = ComponentLibrary.GetComponentType(data.components[i].type);
-                    if (comp != null) { AddComponent(ref comp); }
+                    Type compType = ComponentLibrary.GetComponentType(data.components[i].type);
+                    if (compType != null) { AddComponent(ref compType); }
                 }
             }
 
@@ -74,12 +74,21 @@ namespace StarshotEngine
                     children.Add(new SceneObject(data.children[i], this));
                 }
             }
+
+            Enabled = true;
         }
 
         
-        public void AddComponent<T>(ref T type) where T : ISceneObjectComponent
+        public void AddComponent<T>() where T : ISceneObjectComponent
         {
             T obj = Activator.CreateInstance<T>();
+            components.Add(obj);
+
+            // if component is a renderer, add it to camera
+        }
+        public void AddComponent(ref Type type)
+        {
+            ISceneObjectComponent obj = (ISceneObjectComponent)Activator.CreateInstance(type);
             components.Add(obj);
 
             // if component is a renderer, add it to camera
