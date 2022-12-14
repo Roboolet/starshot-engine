@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using StarshotEngine.SceneObjectComponent;
 using StarshotEngine.ScenePipeline;
 using System;
 using System.Collections.Generic;
@@ -30,8 +31,6 @@ namespace StarshotEngine
             }
         }
 
-        public bool HasRenderer { get; private set; }
-
         public SceneObject(string _name = "NewObject")
         {
             name = _name;
@@ -45,7 +44,7 @@ namespace StarshotEngine
         {
             // set name
             name = data.name;
-            Debug.WriteLine("Creating SceneObject: " + name);
+            Debug.WriteLine(" -- Creating SceneObject: " + name);
 
             // PRS
             position.X = data.position[0];
@@ -60,7 +59,9 @@ namespace StarshotEngine
                 components = new List<ISceneObjectComponent>();
                 for (int i = 0; i < data.components.Length; i++)
                 {
-                    // TODO: AddComponent
+                    Debug.WriteLine("Adding component: " + data.components[i].type);
+                    ISceneObjectComponent comp = ComponentLibrary.GetComponentType(data.components[i].type);
+                    if (comp != null) { AddComponent(ref comp); }
                 }
             }
 
@@ -75,7 +76,16 @@ namespace StarshotEngine
             }
         }
 
-        public void AddChild()
+        
+        public void AddComponent<T>(ref T type) where T : ISceneObjectComponent
+        {
+            T obj = Activator.CreateInstance<T>();
+            components.Add(obj);
+
+            // if component is a renderer, add it to camera
+        }
+
+        public void SetParent()
         {
             // should not allow a parent of this object to become a child, and vice versa
         }
@@ -119,22 +129,15 @@ namespace StarshotEngine
         public void Rotate(float xEuler, float yEuler, float zEuler) { }
         public ISceneObjectComponent GetComponent<T>(ref T type) where T : ISceneObjectComponent
         {
-            for(int i = 0; i < components.Count; i++)
+            for (int i = 0; i < components.Count; i++)
             {
                 ISceneObjectComponent temp = components[i];
-                if(temp.GetType() == type.GetType())
+                if (temp.GetType() == type.GetType())
                 {
                     return temp;
                 }
             }
             return null;
-        }
-        public void AddComponent<T>(ref T type) where T : ISceneObjectComponent
-        {
-            // TODO: integrate ComponentLib
-            // components.Add();
-
-            // if component is a renderer, enable the HasRenderer flag
         }
     }
 }

@@ -30,21 +30,21 @@ namespace StarshotEngine.SceneObjectComponent
             }
         }
 
-        public static T GetComponent<T>(string className) where T : ISceneObjectComponent
+        public static ISceneObjectComponent GetComponentType(string className)
         {
             if(dict != null)
             {
                 if(dict.TryGetValue(className, out ISceneObjectComponent comp))
                 {
-                    return (T)comp;
+                    return comp;
                 }
 
                 Debug.WriteLine("ComponentLibrary does not contain an entry for "+ className);
-                return default(T);
+                return null;
             }
 
             Debug.WriteLine("ComponentLibrary is null");
-            return default(T);
+            return null;
         }
     }
 }
