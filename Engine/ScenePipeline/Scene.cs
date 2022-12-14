@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace StarshotEngine.ScenePipeline
@@ -24,6 +25,8 @@ namespace StarshotEngine.ScenePipeline
         /// </summary>
         public virtual void Populate()
         {
+            Debug.WriteLine("Populating Scene...");
+
             // setup camera
             camera = new SceneCamera();
             camera.position.X = source.camPosition[0];

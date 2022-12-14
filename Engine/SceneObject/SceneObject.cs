@@ -41,7 +41,7 @@ namespace StarshotEngine
         /// Create SceneObject from SceneData
         /// </summary>
         /// <param name=""></param>
-        public SceneObject(SceneObjectData data)
+        public SceneObject(SceneObjectData data, SceneObject parent = null)
         {
             // set name
             name = data.name;
@@ -60,7 +60,7 @@ namespace StarshotEngine
                 components = new List<ISceneObjectComponent>();
                 for (int i = 0; i < data.components.Length; i++)
                 {
-                    // TODO: integrate ComponentLib
+                    // TODO: AddComponent
                 }
             }
 
@@ -70,7 +70,7 @@ namespace StarshotEngine
                 children = new List<SceneObject>();
                 for (int i = 0; i < data.children.Length; i++)
                 {
-                    children.Add(new SceneObject(data.children[i]));
+                    children.Add(new SceneObject(data.children[i], this));
                 }
             }
         }
@@ -82,16 +82,36 @@ namespace StarshotEngine
 
         public void Destroy()
         {
-            for(int i = 0; i < components.Count; i++)
+            if (components != null)
             {
-                components[i].OnDestroy();
+                for (int i = 0; i < components.Count; i++)
+                {
+                    components[i].OnDestroy();
+                }
+            }
+            if (children != null)
+            {
+                for (int i = 0; i < children.Count; i++)
+                {
+                    children[i].Destroy();
+                }
             }
         }
         public void Update(GameTime gameTime)
         {
-            for (int i = 0; i < components.Count; i++)
+            if (components != null)
             {
-                components[i].OnUpdate();
+                for (int i = 0; i < components.Count; i++)
+                {
+                    components[i].OnUpdate(gameTime);
+                }
+            }
+            if (children != null)
+            {
+                for (int i = 0; i < children.Count; i++)
+                {
+                    children[i].Update(gameTime);
+                }
             }
         }
 

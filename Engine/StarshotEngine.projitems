@@ -9,6 +9,7 @@
     <Import_RootNamespace>StarshotEngine</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)SceneObjectComponent\ComponentLibrary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneObjectComponent\ISceneObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScenePipeline\Scene.cs" />
@@ -22,7 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
-    <Folder Include="$(MSBuildThisFileDirectory)SceneObjectComponent\" />
     <Folder Include="$(MSBuildThisFileDirectory)SceneObject\" />
   </ItemGroup>
   <ItemGroup>

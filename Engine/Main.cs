@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using StarshotEngine.SceneObjectComponent;
 using StarshotEngine.ScenePipeline;
 using System;
 using System.Diagnostics;
@@ -35,6 +36,11 @@ namespace StarshotEngine
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // initialize component library
+            ComponentLibrary.Initialize();
+
+            // initialize scene
             currentScene = new Scene(Content.Load<SceneData>("exampleScene"));
             currentScene.Populate();
         }
