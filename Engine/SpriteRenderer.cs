@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace StarshotEngine.SceneObjectComponent
+namespace StarshotEngine
 {
-    public class SpriteRenderer : ISceneObjectComponent
+    public class SpriteRenderer : SceneObjectComponent
     {
         public string spritePath;
         public float[] color;

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Newtonsoft.Json.Linq;
-using StarshotEngine.SceneObjectComponent;
 using StarshotEngine.ScenePipeline;
 using System;
 using System.Collections.Generic;
@@ -18,7 +17,7 @@ namespace StarshotEngine
         public float zRotation;
         public Vector2 scale;
 
-        protected List<ISceneObjectComponent> components;
+        protected List<SceneObjectComponent> components;
         protected List<SceneObject> children;
 
         public event EventHandler EnabledChanged;
@@ -59,7 +58,7 @@ namespace StarshotEngine
             // create components
             if (data.components != null)
             {
-                components = new List<ISceneObjectComponent>();
+                components = new List<SceneObjectComponent>();
                 for (int i = 0; i < data.components.Length; i++)
                 {
                     SceneObjectComponentData socd = data.components[i];
@@ -88,7 +87,8 @@ namespace StarshotEngine
         }
         public void AddComponent(ref Type type, SceneObjectComponentData componentData = null)
         {
-            ISceneObjectComponent obj = (ISceneObjectComponent)Activator.CreateInstance(type);
+            SceneObjectComponent obj = (SceneObjectComponent)Activator.CreateInstance(type);
+            if (obj == null) return;
 
             if (componentData != null)
             {
@@ -133,7 +133,13 @@ namespace StarshotEngine
             // call OnStart on the component
             obj.OnStart();
 
-            // TODO: if component is a renderer, add it to camera
+            // if component is a renderer, add it to camera
+            // TODO: add StackRenderer to this
+            if(type == typeof(SpriteRenderer))
+            {
+                Main.instance.currentScene.camera.AddRenderer((SpriteRenderer)obj);
+            }
+
         }
 
         public void SetParent()
@@ -178,11 +184,11 @@ namespace StarshotEngine
 
         public void Translate(float x, float y) { }
         public void Rotate(float xEuler, float yEuler, float zEuler) { }
-        public ISceneObjectComponent GetComponent<T>(ref T type) where T : ISceneObjectComponent
+        public SceneObjectComponent GetComponent<T>(ref T type) where T : SceneObjectComponent
         {
             for (int i = 0; i < components.Count; i++)
             {
-                ISceneObjectComponent temp = components[i];
+                SceneObjectComponent temp = components[i];
                 if (temp.GetType() == type.GetType())
                 {
                     return temp;

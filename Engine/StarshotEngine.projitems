@@ -9,10 +9,10 @@
     <Import_RootNamespace>StarshotEngine</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)SceneObjectComponent\ComponentLibrary.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SceneObjectComponent\ISceneObjectComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ComponentLibrary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SceneObjectComponent\SpriteRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SpriteRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScenePipeline\Scene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneObject\SceneCamera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneObject\SceneObject.cs" />
