@@ -8,9 +8,10 @@ namespace StarshotEngine.SceneObjectComponent
 {
     public class SpriteRenderer : ISceneObjectComponent
     {
-        public string spritePath { get; set; }
+        public string spritePath;
+        public float[] color;
 
-        public SpriteRenderer()
+        public void OnStart()
         {
             Debug.WriteLine("Created SpriteRenderer :3");
         }

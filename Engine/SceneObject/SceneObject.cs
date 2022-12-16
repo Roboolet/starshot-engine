@@ -95,35 +95,45 @@ namespace StarshotEngine
                 // attempt to modify variables of component using the dynamic data in the SceneObjectComponentData
                 foreach (KeyValuePair<string, JToken> pair in componentData.data)
                 {
-                    // use reflection to try and get the public property
-                    PropertyInfo property = obj.GetType().GetProperty(pair.Key, BindingFlags.Public | BindingFlags.Instance);
-                    if (property != null && property.CanWrite)
+                    // use reflection to try and get the public field
+                    FieldInfo field = obj.GetType().GetField(pair.Key, BindingFlags.Public | BindingFlags.Instance);
+                    if (field != null && !field.IsInitOnly)
                     {
-                        // cast to types based on JTokenType and write to the property
+                        Debug.WriteLine($"Setting field value '{pair.Key}' of '{type.Name}' component to '{pair.Value}'");
+
+                        // cast to types based on JTokenType and write to the field
                         switch (pair.Value.Type)
                         {
                             case JTokenType.Integer:
-                                property.SetValue(obj, pair.Value.ToObject<int>(), null);
+                                field.SetValue(obj, pair.Value.ToObject<int>());
                                 break;
                             case JTokenType.Float:
-                                property.SetValue(obj, pair.Value.ToObject<float>(), null);
+                                field.SetValue(obj, pair.Value.ToObject<float>());
                                 break;
                             case JTokenType.String:
-                                property.SetValue(obj, pair.Value.ToObject<string>(), null);
+                                field.SetValue(obj, pair.Value.ToObject<string>());
                                 break;
                             case JTokenType.Boolean:
-                                property.SetValue(obj, pair.Value.ToObject<bool>(), null);
+                                field.SetValue(obj, pair.Value.ToObject<bool>());
+                                break;
+
+                                // for now, assume arrays are vectors
+                                // TODO: add support for int, string and byte arrays
+                            case JTokenType.Array:
+                                field.SetValue(obj, pair.Value.ToObject<float[]>());
                                 break;
                         }
-                        Debug.WriteLine($"Setting property value '{pair.Key}' of '{type.Name}' component to '{pair.Value}'");
                     }
-                    else Debug.WriteLine($"'{type.Name}' component does not have a property named '{pair.Key}'");
+                    else Debug.WriteLine($"'{type.Name}' component does not have a field named '{pair.Key}'");
                 }
             }
 
             components.Add(obj);
 
-            // if component is a renderer, add it to camera
+            // call OnStart on the component
+            obj.OnStart();
+
+            // TODO: if component is a renderer, add it to camera
         }
 
         public void SetParent()
