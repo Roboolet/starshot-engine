@@ -8,14 +8,15 @@ namespace StarshotEngine.SceneObjectComponent
 {
     public class SpriteRenderer : ISceneObjectComponent
     {
+        public string spritePath { get; set; }
+
         public SpriteRenderer()
         {
-            Debug.WriteLine("Created SpriteRenderer");
+            Debug.WriteLine("Created SpriteRenderer :3");
         }
 
         public void OnUpdate(GameTime gameTime)
         {
-            Debug.WriteLine("hi :3");
         }
     }
 }

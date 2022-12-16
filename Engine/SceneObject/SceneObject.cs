@@ -1,9 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json.Linq;
 using StarshotEngine.SceneObjectComponent;
 using StarshotEngine.ScenePipeline;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace StarshotEngine
@@ -44,7 +47,7 @@ namespace StarshotEngine
         {
             // set name
             name = data.name;
-            Debug.WriteLine(" -- Creating SceneObject: " + name);
+            Debug.WriteLine(" ++ Creating SceneObject: " + name);
 
             // PRS
             position.X = data.position[0];
@@ -59,9 +62,15 @@ namespace StarshotEngine
                 components = new List<ISceneObjectComponent>();
                 for (int i = 0; i < data.components.Length; i++)
                 {
-                    Debug.WriteLine("Adding component: " + data.components[i].type);
-                    Type compType = ComponentLibrary.GetComponentType(data.components[i].type);
-                    if (compType != null) { AddComponent(ref compType); }
+                    SceneObjectComponentData socd = data.components[i];
+                    Debug.WriteLine(" ++ Adding component: " + socd.type);
+                    Type compType = ComponentLibrary.GetComponentType(socd.type);
+
+                    if (compType != null)
+                    {
+                        // add it to the list
+                        AddComponent(ref compType, socd);
+                    }
                 }
             }
 
@@ -77,18 +86,41 @@ namespace StarshotEngine
 
             Enabled = true;
         }
-
-        
-        public void AddComponent<T>() where T : ISceneObjectComponent
-        {
-            T obj = Activator.CreateInstance<T>();
-            components.Add(obj);
-
-            // if component is a renderer, add it to camera
-        }
-        public void AddComponent(ref Type type)
+        public void AddComponent(ref Type type, SceneObjectComponentData componentData = null)
         {
             ISceneObjectComponent obj = (ISceneObjectComponent)Activator.CreateInstance(type);
+
+            if (componentData != null)
+            {
+                // attempt to modify variables of component using the dynamic data in the SceneObjectComponentData
+                foreach (KeyValuePair<string, JToken> pair in componentData.data)
+                {
+                    // use reflection to try and get the public property
+                    PropertyInfo property = obj.GetType().GetProperty(pair.Key, BindingFlags.Public | BindingFlags.Instance);
+                    if (property != null && property.CanWrite)
+                    {
+                        // cast to types based on JTokenType and write to the property
+                        switch (pair.Value.Type)
+                        {
+                            case JTokenType.Integer:
+                                property.SetValue(obj, pair.Value.ToObject<int>(), null);
+                                break;
+                            case JTokenType.Float:
+                                property.SetValue(obj, pair.Value.ToObject<float>(), null);
+                                break;
+                            case JTokenType.String:
+                                property.SetValue(obj, pair.Value.ToObject<string>(), null);
+                                break;
+                            case JTokenType.Boolean:
+                                property.SetValue(obj, pair.Value.ToObject<bool>(), null);
+                                break;
+                        }
+                        Debug.WriteLine($"Setting property value '{pair.Key}' of '{type.Name}' component to '{pair.Value}'");
+                    }
+                    else Debug.WriteLine($"'{type.Name}' component does not have a property named '{pair.Key}'");
+                }
+            }
+
             components.Add(obj);
 
             // if component is a renderer, add it to camera

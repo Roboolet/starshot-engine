@@ -12,16 +12,16 @@
                 {
                     "type": "SpriteRenderer",
                     "data": {
-                        "v_spritePath": "Sprites/placeholder.png",
-                        "v_color": [ 1, 1]
+                        "spritePath": "Sprites/placeholder.png",
+                        "color": [ 1, 1, 1]
                     }
                 },
                 {
                     "type": "SphereCollider",
                     "data": {
-                        "v_collisionLayer": 0,
-                        "v_isTrigger": false,
-                        "v_radius": 10
+                        "collisionLayer": 0,
+                        "isTrigger": false,
+                        "radius": 10
                     }
                 }
             ],
