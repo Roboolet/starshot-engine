@@ -11,12 +11,12 @@ namespace StarshotEngine
         public string spritePath;
         public float[] color;
 
-        public void OnStart()
+        protected override void OnCreate()
         {
             Debug.WriteLine("Created SpriteRenderer :3");
         }
 
-        public void OnUpdate(GameTime gameTime)
+        protected override void OnUpdate(GameTime gameTime)
         {
         }
     }
