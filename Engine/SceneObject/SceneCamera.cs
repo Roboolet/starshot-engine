@@ -13,17 +13,25 @@ namespace StarshotEngine
         private List<SpriteRenderer> renderers = new List<SpriteRenderer>();
 
         // draw what the camera sees to the spritebatch
-        public void RenderTo(SpriteBatch batch)
+        public void Render()
         {
+            SpriteBatch batch = new SpriteBatch(Main.instance.GraphicsDevice);
+
             batch.Begin();
             // render all SpriteRenderers
             for(int i = 0; i < renderers.Count; i++)
             {
                 SpriteRenderer spRend = renderers[i];
 
-                // get texture if not already loaded
-                Texture2D tex;
-                //batch.Draw(tex);
+                // get texture 
+                Texture2D tex = spRend.sprite;
+
+                if (tex != null)
+                {
+                    Rectangle drawRect = new Rectangle(new Point((int)spRend.sceneObject.position.X - tex.Width / 2, (int)spRend.sceneObject.position.Y - tex.Height / 2)
+                        , new Point(tex.Width, tex.Height));
+                    batch.Draw(tex, drawRect, spRend.GetColor());
+                }
             }
 
             batch.End();

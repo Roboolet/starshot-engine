@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -52,6 +53,7 @@ namespace StarshotEngine.ScenePipeline
         public virtual void Draw(GameTime gameTime)
         {
             // TODO: draw all Renderers within the hierarchy
+            camera.Render();
         }
 
         /// <summary>
