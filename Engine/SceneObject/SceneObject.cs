@@ -90,48 +90,9 @@ namespace StarshotEngine
             SceneObjectComponent obj = (SceneObjectComponent)Activator.CreateInstance(type);
             if (obj == null) return;
 
-            if (componentData != null)
-            {
-                // attempt to modify variables of component using the dynamic data in the SceneObjectComponentData
-                foreach (KeyValuePair<string, JToken> pair in componentData.data)
-                {
-                    // use reflection to try and get the public field
-                    FieldInfo field = obj.GetType().GetField(pair.Key, BindingFlags.Public | BindingFlags.Instance);
-                    if (field != null && !field.IsInitOnly)
-                    {
-                        Debug.WriteLine($"Setting field value '{pair.Key}' of '{type.Name}' component to '{pair.Value}'");
-
-                        // cast to types based on JTokenType and write to the field
-                        switch (pair.Value.Type)
-                        {
-                            case JTokenType.Integer:
-                                field.SetValue(obj, pair.Value.ToObject<int>());
-                                break;
-                            case JTokenType.Float:
-                                field.SetValue(obj, pair.Value.ToObject<float>());
-                                break;
-                            case JTokenType.String:
-                                field.SetValue(obj, pair.Value.ToObject<string>());
-                                break;
-                            case JTokenType.Boolean:
-                                field.SetValue(obj, pair.Value.ToObject<bool>());
-                                break;
-
-                                // for now, assume arrays are vectors
-                                // TODO: add support for int, string and byte arrays
-                            case JTokenType.Array:
-                                field.SetValue(obj, pair.Value.ToObject<float[]>());
-                                break;
-                        }
-                    }
-                    else Debug.WriteLine($"'{type.Name}' component does not have a field named '{pair.Key}'");
-                }
-            }
+            obj.InitializeValues(this, componentData);
 
             components.Add(obj);
-
-            // call OnStart on the component
-            obj.OnStart();
 
             // if component is a renderer, add it to camera
             // TODO: add StackRenderer to this
@@ -153,7 +114,7 @@ namespace StarshotEngine
             {
                 for (int i = 0; i < components.Count; i++)
                 {
-                    components[i].OnDestroy();
+                    components[i].Destroy();
                 }
             }
             if (children != null)
@@ -170,7 +131,7 @@ namespace StarshotEngine
             {
                 for (int i = 0; i < components.Count; i++)
                 {
-                    components[i].OnUpdate(gameTime);
+                    components[i].Update(gameTime);
                 }
             }
             if (children != null)
