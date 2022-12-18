@@ -18,8 +18,7 @@ namespace StarshotEngine.Rendering
         public void Render()
         {
             SpriteBatch batch = new SpriteBatch(Main.instance.GraphicsDevice);
-
-            batch.Begin();
+            batch.Begin(SpriteSortMode.FrontToBack);
             // render all SpriteRenderers
             for(int i = 0; i < renderers.Count; i++)
             {
@@ -36,7 +35,8 @@ namespace StarshotEngine.Rendering
                     Rectangle drawRect = new Rectangle(
                         new Point((int)(screenPos.X - scaledTex.X / 2), (int)(screenPos.Y - scaledTex.Y / 2)),
                         new Point((int)scaledTex.X, (int)scaledTex.Y));
-                    batch.Draw(tex, drawRect, spRend.GetColor());
+                    batch.Draw(tex, drawRect, null, spRend.GetColor(), spRend.sceneObject.Rotation, Vector2.Zero, SpriteEffects.None, spRend.drawOrder);
+                    
                 }
             }
 

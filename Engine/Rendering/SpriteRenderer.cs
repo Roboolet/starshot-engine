@@ -13,12 +13,17 @@ namespace StarshotEngine.Rendering
         public string spritePath;
         public float[] color;
 
+        // set between 0 to 1 range
+        public float drawOrder;
+
         public Texture2D sprite { get; private set; }
 
         protected override void OnCreate()
         {
             Debug.WriteLine("Created SpriteRenderer :3");
             SetSprite(spritePath);
+
+            drawOrder = Math.Clamp(drawOrder, 0, 1);
         }
 
         public void SetSprite(string path)
