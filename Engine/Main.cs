@@ -38,10 +38,7 @@ namespace StarshotEngine
 
             // initialize component library
             ComponentLibrary.Initialize();
-
-            // initialize scene
-            currentScene = new Scene(Content.Load<SceneData>("exampleScene"));
-            currentScene.Populate();
+            
         }
 
         protected override void Update(GameTime gameTime)
@@ -57,9 +54,10 @@ namespace StarshotEngine
             if (currentScene != null) currentScene.Draw(gameTime);
         }
 
-        public Scene LoadScene(string name)
+        public void LoadScene(string name)
         {
-            return null;
+            currentScene = new Scene(Content.Load<SceneData>(name));
+            currentScene.Populate();
         }
     }
 }

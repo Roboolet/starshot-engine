@@ -1,5 +1,5 @@
 {
-    "name": "exampleScene",
+    "name": "GameplayScene",
     "camPosition": [ 0, 0],
     "camRotation": 0,
     "objects": [
@@ -29,7 +29,7 @@
             "children": [
                 {
                     "name": "childObj",
-                    "position": [ 1, 1],
+                    "position": [ 5, 1],
                     "rotation": 0,
                     "scale": [ 1, 1],
                     "components": [
@@ -40,14 +40,18 @@
                                 "color": [ 1, 0, 1 ],
                                 "drawOrder": 0.2
                             }
+                        },
+                        {
+                            "type": "SpinComponent",
+                            "data": {}
                         }
                     ],
                     "children": [
                         {
                             "name": "grandChildObj",
-                            "position": [ 2.5, 1],
-                            "rotation": 25,
-                            "scale": [ 6, 4],
+                            "position": [ 4, 4],
+                            "rotation": 0,
+                            "scale": [ 5, 2],
                             "components": [
                                 {
                                     "type": "SpriteRenderer",

@@ -14,12 +14,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin exampleScene.json
-/importer:JsonContentImporter
-/processor:JsonContentProcessor
-/processorParam:ContentType=StarshotEngine.ScenePipeline.SceneImporter, ExampleProject
-/build:exampleScene.json
-
 #begin placeholder.png
 /importer:TextureImporter
 /processor:TextureProcessor

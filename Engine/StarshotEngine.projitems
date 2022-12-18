@@ -37,7 +37,4 @@
     <None Include="$(MSBuildThisFileDirectory)Content\obj\Windows\.mgstats" />
     <None Include="$(MSBuildThisFileDirectory)Content\obj\Windows\exampleScene.mgcontent" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Content\exampleScene.json" />
-  </ItemGroup>
 </Project>

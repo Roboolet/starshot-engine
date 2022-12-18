@@ -7,5 +7,11 @@ namespace ExampleProject
 {
     public class Game1 : Main 
     {
+
+        protected override void LoadContent()
+        {
+            base.LoadContent();
+            LoadScene("GameplayScene");
+        }
     }
 }

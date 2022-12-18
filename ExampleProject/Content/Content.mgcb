@@ -14,3 +14,9 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin GameplayScene.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=StarshotEngine.ScenePipeline.SceneImporter, ExampleProject
+/build:GameplayScene.json
+

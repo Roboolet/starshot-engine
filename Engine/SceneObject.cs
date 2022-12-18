@@ -14,6 +14,19 @@ namespace StarshotEngine
     public class SceneObject
     {
         public SceneObject parent { get; set; }
+        public SceneObject root
+        {
+            get
+            {
+                SceneObject iter = parent;
+                while(iter != null)
+                {
+                    if (iter.parent != null) iter = iter.parent;
+                    else break;
+                }
+                return iter;
+            }
+        }
         public string name;
 
         Vector2 _Position;
@@ -162,9 +175,6 @@ namespace StarshotEngine
                 }
             }
         }
-
-        public void Translate(float x, float y) { }
-        public void Rotate(float xEuler, float yEuler, float zEuler) { }
 
         /// <summary>
         /// Gets the sum position of this object

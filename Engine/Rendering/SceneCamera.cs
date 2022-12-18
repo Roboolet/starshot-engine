@@ -35,7 +35,7 @@ namespace StarshotEngine.Rendering
                     Rectangle drawRect = new Rectangle(
                         new Point((int)(screenPos.X - scaledTex.X / 2), (int)(screenPos.Y - scaledTex.Y / 2)),
                         new Point((int)scaledTex.X, (int)scaledTex.Y));
-                    batch.Draw(tex, drawRect, null, spRend.GetColor(), spRend.sceneObject.Rotation, Vector2.Zero, SpriteEffects.None, spRend.drawOrder);
+                    batch.Draw(tex, drawRect, null, spRend.GetColor(), spRend.sceneObject.Rotation, new Vector2(tex.Width/2, tex.Height/2), SpriteEffects.None, spRend.drawOrder);
                     
                 }
             }
