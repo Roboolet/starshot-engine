@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace StarshotEngine
+namespace StarshotEngine.Rendering
 {
     public class SpriteRenderer : SceneObjectComponent
     {

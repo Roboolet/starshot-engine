@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Newtonsoft.Json.Linq;
 using StarshotEngine.ScenePipeline;
+using StarshotEngine.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

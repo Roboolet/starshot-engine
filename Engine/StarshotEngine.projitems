@@ -12,10 +12,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)ComponentLibrary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SpriteRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rendering\SpriteRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScenePipeline\Scene.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SceneObject\SceneCamera.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SceneObject\SceneObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rendering\SceneCamera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScenePipeline\SceneData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScenePipeline\SceneImporter.cs" />
   </ItemGroup>
@@ -24,7 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
-    <Folder Include="$(MSBuildThisFileDirectory)SceneObject\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Rendering\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\exampleScene.xnb" />
