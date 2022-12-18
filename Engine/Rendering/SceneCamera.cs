@@ -30,8 +30,8 @@ namespace StarshotEngine.Rendering
 
                 if (tex != null)
                 {
-                    Vector2 screenPos = WorldToScreenPos(spRend.sceneObject.position);
-                    Vector2 scaledTex = new Vector2(tex.Width * renderScale, tex.Height * renderScale);
+                    Vector2 screenPos = WorldToScreenPos(spRend.sceneObject.Position);
+                    Vector2 scaledTex = new Vector2(tex.Width * renderScale * spRend.sceneObject.Scale.X, tex.Height * renderScale * spRend.sceneObject.Scale.Y);
 
                     Rectangle drawRect = new Rectangle(
                         new Point((int)(screenPos.X - scaledTex.X / 2), (int)(screenPos.Y - scaledTex.Y / 2)),
@@ -54,8 +54,8 @@ namespace StarshotEngine.Rendering
             // get coord, subtract camera, and center in screen.
             // additionally, invert the Y axis
             vec = new Vector2(
-                vec.X*pixelsPerUnit*renderScale - position.X*pixelsPerUnit*renderScale + vp.Width / 2,
-                -vec.Y*pixelsPerUnit*renderScale - -position.Y*pixelsPerUnit*renderScale + vp.Height / 2);
+                vec.X*pixelsPerUnit*renderScale - Position.X*pixelsPerUnit*renderScale + vp.Width / 2,
+                -vec.Y*pixelsPerUnit*renderScale - -Position.Y*pixelsPerUnit*renderScale + vp.Height / 2);
             return vec;
         }
     }

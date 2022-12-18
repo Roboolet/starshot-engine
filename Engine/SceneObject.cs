@@ -13,10 +13,29 @@ namespace StarshotEngine
 {
     public class SceneObject
     {
+        public SceneObject parent { get; set; }
         public string name;
-        public Vector2 position;
-        public float zRotation;
-        public Vector2 scale;
+
+        Vector2 _Position;
+        public Vector2 Position
+        {
+            get { return GetPosition(); }
+            set { _Position = value; }
+        }
+
+        float _Rotation;
+        public float Rotation
+        {
+            get { return GetRotation(); }
+            set { _Rotation = value; }
+        }
+
+        Vector2 _Scale;
+        public Vector2 Scale
+        {
+            get { return GetScale(); }
+            set { _Scale = value; }
+        }
 
         protected List<SceneObjectComponent> components;
         protected List<SceneObject> children;
@@ -43,26 +62,26 @@ namespace StarshotEngine
         /// Create SceneObject from SceneData
         /// </summary>
         /// <param name=""></param>
-        public SceneObject(SceneObjectData data, SceneObject parent = null)
+        public SceneObject(SceneObjectData _data, SceneObject _parent = null)
         {
+            parent = _parent;
+
             // set name
-            name = data.name;
+            name = _data.name;
             Debug.WriteLine(" ++ Creating SceneObject: " + name);
 
             // PRS
-            position.X = data.position[0];
-            position.Y = data.position[1];
-            zRotation = data.rotation;
-            scale.X = data.scale[0];
-            scale.Y = data.scale[1];
+            Position = new Vector2( _data.position[0], _data.position[1]);
+            Rotation = _data.rotation;
+            Scale = new Vector2(_data.scale[0], _data.scale[1]);
 
             // create components
-            if (data.components != null)
+            if (_data.components != null)
             {
                 components = new List<SceneObjectComponent>();
-                for (int i = 0; i < data.components.Length; i++)
+                for (int i = 0; i < _data.components.Length; i++)
                 {
-                    SceneObjectComponentData socd = data.components[i];
+                    SceneObjectComponentData socd = _data.components[i];
                     Debug.WriteLine(" ++ Adding component: " + socd.type);
                     Type compType = ComponentLibrary.GetComponentType(socd.type);
 
@@ -75,12 +94,12 @@ namespace StarshotEngine
             }
 
             // create children
-            if (data.children != null)
+            if (_data.children != null)
             {
                 children = new List<SceneObject>();
-                for (int i = 0; i < data.children.Length; i++)
+                for (int i = 0; i < _data.children.Length; i++)
                 {
-                    children.Add(new SceneObject(data.children[i], this));
+                    children.Add(new SceneObject(_data.children[i], this));
                 }
             }
 
@@ -146,6 +165,58 @@ namespace StarshotEngine
 
         public void Translate(float x, float y) { }
         public void Rotate(float xEuler, float yEuler, float zEuler) { }
+
+        /// <summary>
+        /// Gets the sum position of this object
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 GetPosition()
+        {
+            Vector2 sum = _Position;
+            SceneObject parentIteration = parent;
+            while(parentIteration != null)
+            {
+                sum = sum + parentIteration._Position;
+                parentIteration = parentIteration.parent;
+            }        
+
+            return sum;
+        }
+
+        /// <summary>
+        /// Gets the sum scale of this object
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 GetScale()
+        {
+            Vector2 sum = _Scale;
+            SceneObject parentIteration = parent;
+            while (parentIteration != null)
+            {
+                sum = sum * parentIteration._Scale;
+                parentIteration = parentIteration.parent;
+            }
+
+            return sum;
+        }
+
+        /// <summary>
+        /// Gets the sum rotation of this object
+        /// </summary>
+        /// <returns></returns>
+        public float GetRotation()
+        {
+            float sum = _Rotation;
+            SceneObject parentIteration = parent;
+            while (parentIteration != null)
+            {
+                sum = sum + parentIteration._Rotation;
+                parentIteration = parentIteration.parent;
+            }
+
+            return sum;
+        }
+
         public SceneObjectComponent GetComponent<T>(ref T type) where T : SceneObjectComponent
         {
             for (int i = 0; i < components.Count; i++)
