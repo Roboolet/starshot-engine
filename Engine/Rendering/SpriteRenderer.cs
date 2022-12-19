@@ -20,7 +20,6 @@ namespace StarshotEngine.Rendering
 
         protected override void OnCreate()
         {
-            Debug.WriteLine("Created SpriteRenderer :3");
             SetSprite(spritePath);
 
             drawOrder = Math.Clamp(drawOrder, 0, 1);

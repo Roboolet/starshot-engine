@@ -13,8 +13,8 @@
                     "type": "SpriteRenderer",
                     "data": {
                         "spritePath": "placeholder",
-                        "color": [ 1, 1, 1 ],
-                        "drawOrder": 0
+                        "color": [ 1, 0, 0 ],
+                        "drawOrder": 0.4
                     }
                 },
                 {
@@ -33,7 +33,7 @@
             "children": [
                 {
                     "name": "childObj",
-                    "position": [ 5, 1],
+                    "position": [ 0, 1],
                     "rotation": 0,
                     "scale": [ 1, 1],
                     "components": [
@@ -41,28 +41,64 @@
                             "type": "SpriteRenderer",
                             "data": {
                                 "spritePath": "placeholder",
-                                "color": [ 1, 0, 1 ],
-                                "drawOrder": 0.2
+                                "color": [ 1, 1, 1 ],
+                                "drawOrder": 0.3
                             }
                         }
                     ],
                     "children": [
                         {
                             "name": "grandChildObj",
-                            "position": [ 4, 4],
+                            "position": [ 0,2],
                             "rotation": 0,
-                            "scale": [ 5, 2],
+                            "scale": [ 1, 1],
                             "components": [
                                 {
                                     "type": "SpriteRenderer",
                                     "data": {
                                         "spritePath": "placeholder",
-                                        "color": [ 1, 1, 0 ],
-                                        "drawOrder": 0.1
+                                        "color": [ 0.8, 0.8, 0.8 ],
+                                        "drawOrder": 0.2
                                     }
                                 }
                             ],
-                            "children": []
+                            "children": [
+                                {
+                                    "name": "granderChildObj",
+                                    "position": [ 0, 3 ],
+                                    "rotation": 0,
+                                    "scale": [ 1, 1 ],
+                                    "components": [
+                                        {
+                                            "type": "SpriteRenderer",
+                                            "data": {
+                                                "spritePath": "placeholder",
+                                                "color": [ 0.6, 0.6, 0.6 ],
+                                                "drawOrder": 0.1
+                                            }
+                                        }
+                                    ],
+                                    "children": [
+                                        {
+                                            "name": "grandererChildObj",
+                                            "position": [ 0, 4 ],
+                                            "rotation": 0,
+                                            "scale": [ 1, 1 ],
+                                            "components": [
+                                                {
+                                                    "type": "SpriteRenderer",
+                                                    "data": {
+                                                        "spritePath": "placeholder",
+                                                        "color": [ 0.5, 0.5, 0.5 ],
+                                                        "drawOrder": 0
+                                                    }
+                                                }
+                                            ],
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 }

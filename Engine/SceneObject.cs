@@ -180,15 +180,11 @@ namespace StarshotEngine
         /// <returns></returns>
         public Vector2 GetPosition()
         {
-            Vector2 sum = _Position;
-            SceneObject parentIteration = parent;
-            while(parentIteration != null)
+            if (parent != null)
             {
-                sum = sum + parentIteration._Position;
-                parentIteration = parentIteration.parent;
-            }        
-
-            return sum;
+                return RotateAboutObject(_Position, parent.Position, parent.Rotation);
+            }
+            else return _Position;
         }
 
         /// <summary>
@@ -215,21 +211,30 @@ namespace StarshotEngine
         public float GetRotation()
         {
             float sum = _Rotation;
-            SceneObject parentIteration = parent;
-            while (parentIteration != null)
+            if (parent != null)
             {
-                sum = sum + parentIteration._Rotation;
-                parentIteration = parentIteration.parent;
+                sum = sum + parent.Rotation;
             }
 
             return sum;
         }
 
-        public Vector2 RotateAboutPoint(Vector2 input, float degrees)
+        public Vector2 RotateAboutObject(Vector2 input, Vector2 pivot, float rads)
         {
-            double rads = degrees * 0.0174533d; // convert to radians
-            double s = Math.Sin(rads);
-            return new Vector2();
+            rads *= -1;
+            float s = (float)Math.Sin(rads);
+            float c = (float)Math.Cos(rads);
+
+            // translate to origin
+            input.X = input.X - pivot.X;
+            input.Y = input.Y - pivot.Y;
+
+            // rotate point
+            float xnew = input.X * c - input.Y * s;
+            float ynew = input.X * s + input.Y * c;
+
+            // translate back
+            return new Vector2(xnew + pivot.X, ynew + pivot.Y);
         }
 
         public SceneObjectComponent GetComponent<T>(ref T type) where T : SceneObjectComponent
