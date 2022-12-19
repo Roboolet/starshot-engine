@@ -43,15 +43,15 @@ namespace StarshotEngine
             set { _Rotation = value; }
         }
 
-        Vector2 _Scale;
+        Vector2 _Scale = Vector2.One;
         public Vector2 Scale
         {
             get { return GetScale(); }
             set { _Scale = value; }
         }
 
-        protected List<SceneObjectComponent> components;
-        protected List<SceneObject> children;
+        protected List<SceneObjectComponent> components = new List<SceneObjectComponent>();
+        protected List<SceneObject> children = new List<SceneObject>();
 
         public event EventHandler EnabledChanged;
 
@@ -69,6 +69,9 @@ namespace StarshotEngine
         public SceneObject(string _name = "NewObject")
         {
             name = _name;
+            Enabled = true;
+
+            Main.instance.currentScene.AddSceneObject(this);
         }
 
         /// <summary>
@@ -91,7 +94,6 @@ namespace StarshotEngine
             // create components
             if (_data.components != null)
             {
-                components = new List<SceneObjectComponent>();
                 for (int i = 0; i < _data.components.Length; i++)
                 {
                     SceneObjectComponentData socd = _data.components[i];
@@ -117,6 +119,9 @@ namespace StarshotEngine
             }
 
             Enabled = true;
+
+            // add to scene
+            Main.instance.currentScene.AddSceneObject(this);
         }
         public void AddComponent(ref Type type, SceneObjectComponentData componentData = null)
         {
@@ -126,13 +131,6 @@ namespace StarshotEngine
             obj.InitializeValues(this, componentData);
 
             components.Add(obj);
-
-            // if component is a renderer, add it to camera
-            // TODO: add StackRenderer to this
-            if(type == typeof(SpriteRenderer))
-            {
-                Main.instance.currentScene.camera.AddRenderer((SpriteRenderer)obj);
-            }
 
         }
 
@@ -225,6 +223,13 @@ namespace StarshotEngine
             }
 
             return sum;
+        }
+
+        public Vector2 RotateAboutPoint(Vector2 input, float degrees)
+        {
+            double rads = degrees * 0.0174533d; // convert to radians
+            double s = Math.Sin(rads);
+            return new Vector2();
         }
 
         public SceneObjectComponent GetComponent<T>(ref T type) where T : SceneObjectComponent

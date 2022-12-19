@@ -1,4 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using StarshotEngine;
+using StarshotEngine.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -24,11 +24,15 @@ namespace StarshotEngine.Rendering
             SetSprite(spritePath);
 
             drawOrder = Math.Clamp(drawOrder, 0, 1);
+
+            Main.instance.currentScene.camera.AddRenderer(this);
+            Debug.WriteLine(sceneObject.Position);
         }
 
         public void SetSprite(string path)
         {
             spritePath = path;
+            if (path == null) spritePath = "placeholder";
             try
             {
                 Texture2D tex = Main.instance.Content.Load<Texture2D>(spritePath);
@@ -37,6 +41,7 @@ namespace StarshotEngine.Rendering
             catch (ContentLoadException)
             {
                 Debug.WriteLine($" !! Could not load Texture2D '{path}' from Content");
+                Texture2D tex = Main.instance.Content.Load<Texture2D>(spritePath);
             }
         }
         public void SetSprite(Texture2D tex)
@@ -46,7 +51,11 @@ namespace StarshotEngine.Rendering
 
         public Color GetColor()
         {
-            return new Color(color[0], color[1], color[2]);
+            if (color != null)
+            {
+                return new Color(color[0], color[1], color[2]);
+            }
+            else return Color.White;
         }
     }
 }

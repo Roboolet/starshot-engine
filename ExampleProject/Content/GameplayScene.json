@@ -24,6 +24,10 @@
                         "isTrigger": false,
                         "radius": 10
                     }
+                },
+                {
+                    "type": "SpinComponent",
+                    "data": {}
                 }
             ],
             "children": [
@@ -40,10 +44,6 @@
                                 "color": [ 1, 0, 1 ],
                                 "drawOrder": 0.2
                             }
-                        },
-                        {
-                            "type": "SpinComponent",
-                            "data": {}
                         }
                     ],
                     "children": [

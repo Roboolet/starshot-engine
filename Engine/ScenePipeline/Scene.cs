@@ -36,7 +36,7 @@ namespace StarshotEngine.ScenePipeline
             // create SceneObjects and components
             for(int i = 0; i < source.objects.Length; i++)
             {
-                hierarchy.Add(new SceneObject(source.objects[i]));
+                new SceneObject(source.objects[i]);
             }
         }
 
@@ -53,6 +53,11 @@ namespace StarshotEngine.ScenePipeline
         {
             // TODO: draw all Renderers within the hierarchy
             camera.Render();
+        }
+
+        public void AddSceneObject(SceneObject obj)
+        {
+            hierarchy.Add(obj);
         }
 
         /// <summary>
