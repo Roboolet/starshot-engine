@@ -49,9 +49,9 @@
                     "children": [
                         {
                             "name": "grandChildObj",
-                            "position": [ 0,2],
+                            "position": [ 0,1],
                             "rotation": 0,
-                            "scale": [ 1, 1],
+                            "scale": [ 2, 1],
                             "components": [
                                 {
                                     "type": "SpriteRenderer",
@@ -65,7 +65,7 @@
                             "children": [
                                 {
                                     "name": "granderChildObj",
-                                    "position": [ 0, 3 ],
+                                    "position": [ 0, 1 ],
                                     "rotation": 0,
                                     "scale": [ 1, 1 ],
                                     "components": [
@@ -81,7 +81,7 @@
                                     "children": [
                                         {
                                             "name": "grandererChildObj",
-                                            "position": [ 0, 4 ],
+                                            "position": [ 0, 1 ],
                                             "rotation": 0,
                                             "scale": [ 1, 1 ],
                                             "components": [

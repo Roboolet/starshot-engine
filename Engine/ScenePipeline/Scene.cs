@@ -30,7 +30,7 @@ namespace StarshotEngine.ScenePipeline
 
             // setup camera
             camera = new SceneCamera();
-            camera.Position = new Vector2(source.camPosition[0], source.camPosition[1]);
+            camera.Position = new Vector3(source.camPosition[0], source.camPosition[1], 0);
             camera.Rotation = source.camRotation;
 
             // create SceneObjects and components

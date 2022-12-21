@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using MonoGame.Extended;
 
 namespace StarshotEngine
 {
@@ -29,28 +30,63 @@ namespace StarshotEngine
         }
         public string name;
 
-        Vector2 _Position;
-        public Vector2 Position
+        #region Position, Rotation, Scale
+        public Matrix matrix = Matrix.Identity;
+        public Matrix LocalMatrix
         {
-            get { return GetPosition(); }
-            set { _Position = value; }
+            get
+            {
+                if (parent != null)
+                {
+                    return matrix * parent.LocalMatrix;
+                }
+                else return matrix;
+            }
         }
 
-        float _Rotation;
+        public Vector3 Position
+        {
+            get
+            {
+                return LocalMatrix.Translation;
+            }
+            set
+            {
+                matrix = Matrix.CreateTranslation(value) * matrix;
+            }
+        }
         public float Rotation
         {
-            get { return GetRotation(); }
-            set { _Rotation = value; }
+            get 
+            {
+                if (parent != null)
+                {
+                    return MathF.Atan2(matrix.M21, matrix.M11) + parent.Rotation;
+                }
+                else return MathF.Atan2(matrix.M21, matrix.M11);
+            }
+            set
+            {
+                matrix = Matrix.CreateRotationZ(value) * matrix;
+            }
         }
 
-        Vector2 _Scale = Vector2.One;
-        public Vector2 Scale
+        public Vector3 Scale
         {
-            get { return GetScale(); }
-            set { _Scale = value; }
+            get 
+            {
+                Matrix mat = LocalMatrix;
+                float lenX = new Vector3(mat.M11, mat.M21, mat.M31).Length();
+                float lenY = new Vector3(mat.M12, mat.M22, mat.M32).Length();
+                float lenZ = new Vector3(mat.M13, mat.M23, mat.M33).Length();
+                return new Vector3(lenX, lenY, lenZ);
+            }
+            set { matrix = Matrix.CreateScale(value) * matrix; }
         }
+        #endregion
 
         protected List<SceneObjectComponent> components = new List<SceneObjectComponent>();
+
         protected List<SceneObject> children = new List<SceneObject>();
 
         public event EventHandler EnabledChanged;
@@ -87,9 +123,9 @@ namespace StarshotEngine
             Debug.WriteLine(" ++ Creating SceneObject: " + name);
 
             // PRS
-            Position = new Vector2( _data.position[0], _data.position[1]);
+            Position = new Vector3( _data.position[0], _data.position[1], 0);
             Rotation = _data.rotation;
-            Scale = new Vector2(_data.scale[0], _data.scale[1]);
+            Scale = new Vector3(_data.scale[0], _data.scale[1], 1);
 
             // create components
             if (_data.components != null)
@@ -172,70 +208,7 @@ namespace StarshotEngine
                     children[i].Update(gameTime);
                 }
             }
-        }
-
-        /// <summary>
-        /// Gets the sum position of this object
-        /// </summary>
-        /// <returns></returns>
-        public Vector2 GetPosition()
-        {
-            if (parent != null)
-            {
-                return RotateAboutObject(_Position, parent.Position, parent.Rotation);
-            }
-            else return _Position;
-        }
-
-        /// <summary>
-        /// Gets the sum scale of this object
-        /// </summary>
-        /// <returns></returns>
-        public Vector2 GetScale()
-        {
-            Vector2 sum = _Scale;
-            SceneObject parentIteration = parent;
-            while (parentIteration != null)
-            {
-                sum = sum * parentIteration._Scale;
-                parentIteration = parentIteration.parent;
-            }
-
-            return sum;
-        }
-
-        /// <summary>
-        /// Gets the sum rotation of this object
-        /// </summary>
-        /// <returns></returns>
-        public float GetRotation()
-        {
-            float sum = _Rotation;
-            if (parent != null)
-            {
-                sum = sum + parent.Rotation;
-            }
-
-            return sum;
-        }
-
-        public Vector2 RotateAboutObject(Vector2 input, Vector2 pivot, float rads)
-        {
-            rads *= -1;
-            float s = (float)Math.Sin(rads);
-            float c = (float)Math.Cos(rads);
-
-            // translate to origin
-            input.X = input.X - pivot.X;
-            input.Y = input.Y - pivot.Y;
-
-            // rotate point
-            float xnew = input.X * c - input.Y * s;
-            float ynew = input.X * s + input.Y * c;
-
-            // translate back
-            return new Vector2(xnew + pivot.X, ynew + pivot.Y);
-        }
+        }        
 
         public SceneObjectComponent GetComponent<T>(ref T type) where T : SceneObjectComponent
         {

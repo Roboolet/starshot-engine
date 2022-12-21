@@ -14,11 +14,11 @@ namespace ExampleProject
 
         protected override void OnUpdate(GameTime gameTime)
         {
-            sceneObject.Rotation += rot * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            sceneObject.Rotation = rot * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             KeyboardState state = Keyboard.GetState();
-            if (state.IsKeyDown(Keys.A)) rot -= (float)gameTime.ElapsedGameTime.TotalSeconds*10;
-            if (state.IsKeyDown(Keys.D)) rot += (float)gameTime.ElapsedGameTime.TotalSeconds*10;
+            if (state.IsKeyDown(Keys.A)) rot += (float)gameTime.ElapsedGameTime.TotalSeconds*10;
+            if (state.IsKeyDown(Keys.D)) rot -= (float)gameTime.ElapsedGameTime.TotalSeconds*10;
         }
     }
 }

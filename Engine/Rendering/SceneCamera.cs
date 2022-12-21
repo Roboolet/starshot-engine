@@ -34,7 +34,7 @@ namespace StarshotEngine.Rendering
                     Vector2 scaledTex = new Vector2(tex.Width * renderScale * spRend.sceneObject.Scale.X, tex.Height * renderScale * spRend.sceneObject.Scale.Y);
 
                     Rectangle drawRect = new Rectangle(
-                        new Point((int)(screenPos.X - scaledTex.X / 2), (int)(screenPos.Y - scaledTex.Y / 2)),
+                        new Point((int)(screenPos.X), (int)(screenPos.Y)),
                         new Point((int)scaledTex.X, (int)scaledTex.Y));
                     batch.Draw(tex, drawRect, null, spRend.GetColor(), spRend.sceneObject.Rotation, new Vector2(tex.Width/2, tex.Height/2), SpriteEffects.None, spRend.drawOrder);
                     
@@ -49,15 +49,15 @@ namespace StarshotEngine.Rendering
             renderers.Add(renderer);
         }
 
-        public Vector2 WorldToScreenPos(Vector2 vec)
+        public Vector2 WorldToScreenPos(Vector3 vec)
         {
             Viewport vp = Main.instance.GraphicsDevice.Viewport;
             // get coord, subtract camera, and center in screen.
             // additionally, invert the Y axis
-            vec = new Vector2(
+            Vector2 newVec = new Vector2(
                 vec.X*pixelsPerUnit*renderScale - Position.X*pixelsPerUnit*renderScale + vp.Width / 2,
                 -vec.Y*pixelsPerUnit*renderScale - -Position.Y*pixelsPerUnit*renderScale + vp.Height / 2);
-            return vec;
+            return newVec;
         }
     }
 }
