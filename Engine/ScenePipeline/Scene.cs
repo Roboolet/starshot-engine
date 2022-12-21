@@ -38,7 +38,7 @@ namespace StarshotEngine.ScenePipeline
             // create SceneObjects and components
             for(int i = 0; i < source.objects.Length; i++)
             {
-                new SceneObject(source.objects[i]);
+                new SceneObject(null, source.objects[i]);
             }
         }
 

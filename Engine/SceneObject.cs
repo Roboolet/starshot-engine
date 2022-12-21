@@ -103,9 +103,10 @@ namespace StarshotEngine
             }
         }
 
-        public SceneObject(string _name = "NewObject")
+        public SceneObject(SceneObject _parent = null, string _name = "NewObject")
         {
             name = _name;
+            parent = _parent;
             Enabled = true;
 
             scene = Main.instance.currentScene;
@@ -116,7 +117,7 @@ namespace StarshotEngine
         /// Create SceneObject from SceneData
         /// </summary>
         /// <param name=""></param>
-        public SceneObject(SceneObjectData _data, SceneObject _parent = null)
+        public SceneObject(SceneObject _parent, SceneObjectData _data)
         {
             parent = _parent;
             scene = Main.instance.currentScene;
@@ -153,7 +154,7 @@ namespace StarshotEngine
                 children = new List<SceneObject>();
                 for (int i = 0; i < _data.children.Length; i++)
                 {
-                    children.Add(new SceneObject(_data.children[i], this));
+                    children.Add(new SceneObject(this, _data.children[i]));
                 }
             }
 
@@ -170,7 +171,17 @@ namespace StarshotEngine
             obj.InitializeValues(this, componentData);
 
             components.Add(obj);
+        }
 
+        public T AddComponent<T>(SceneObjectComponentData componentData = null) where T : SceneObjectComponent
+        {
+            T obj = Activator.CreateInstance<T>();
+            if (obj == null) return null;
+
+            obj.InitializeValues(this, componentData);
+
+            components.Add(obj);
+            return obj;
         }
 
         public void SetParent()
