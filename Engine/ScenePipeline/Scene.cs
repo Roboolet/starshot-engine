@@ -15,6 +15,8 @@ namespace StarshotEngine.ScenePipeline
 
         List<SceneObject> hierarchy = new List<SceneObject>();
 
+        public Matrix matrix = Matrix.Identity;
+
         public Scene(SceneData _source)
         {
             source = _source;

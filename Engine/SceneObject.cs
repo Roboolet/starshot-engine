@@ -15,6 +15,7 @@ namespace StarshotEngine
     public class SceneObject
     {
         public SceneObject parent { get; set; }
+        public Scene scene { get; set; }
         public SceneObject root
         {
             get
@@ -40,7 +41,7 @@ namespace StarshotEngine
                 {
                     return matrix * parent.LocalMatrix;
                 }
-                else return matrix;
+                else return matrix * scene.matrix;
             }
         }
 
@@ -107,7 +108,8 @@ namespace StarshotEngine
             name = _name;
             Enabled = true;
 
-            Main.instance.currentScene.AddSceneObject(this);
+            scene = Main.instance.currentScene;
+            scene.AddSceneObject(this);
         }
 
         /// <summary>
@@ -117,6 +119,7 @@ namespace StarshotEngine
         public SceneObject(SceneObjectData _data, SceneObject _parent = null)
         {
             parent = _parent;
+            scene = Main.instance.currentScene;
 
             // set name
             name = _data.name;
@@ -157,7 +160,7 @@ namespace StarshotEngine
             Enabled = true;
 
             // add to scene
-            Main.instance.currentScene.AddSceneObject(this);
+            scene.AddSceneObject(this);
         }
         public void AddComponent(ref Type type, SceneObjectComponentData componentData = null)
         {
