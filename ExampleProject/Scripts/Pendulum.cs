@@ -23,7 +23,7 @@ namespace ExampleProject
 
                 if(i == 9)
                 {
-                    iterParent.AddComponent<Drawer>();
+                    //iterParent.AddComponent<Drawer>();
                 }
 
             }

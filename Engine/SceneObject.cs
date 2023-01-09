@@ -53,7 +53,7 @@ namespace StarshotEngine
             }
             set
             {
-                matrix = Matrix.CreateTranslation(value) * matrix;
+                matrix = Matrix.CreateTranslation(value - Position) * matrix;
             }
         }
         public float Rotation
@@ -68,7 +68,7 @@ namespace StarshotEngine
             }
             set
             {
-                matrix = Matrix.CreateRotationZ(value) * matrix;
+                matrix = Matrix.CreateRotationZ(value - Rotation) * matrix;
             }
         }
 
@@ -82,7 +82,7 @@ namespace StarshotEngine
                 float lenZ = new Vector3(mat.M13, mat.M23, mat.M33).Length();
                 return new Vector3(lenX, lenY, lenZ);
             }
-            set { matrix = Matrix.CreateScale(value) * matrix; }
+            set { matrix = Matrix.CreateScale(value - Scale) * matrix; }
         }
         #endregion
 

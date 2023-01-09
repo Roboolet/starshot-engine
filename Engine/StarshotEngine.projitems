@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ComponentLibrary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rendering\StackRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\SpriteRenderer.cs" />
@@ -24,7 +25,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Rendering\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\exampleScene.xnb" />

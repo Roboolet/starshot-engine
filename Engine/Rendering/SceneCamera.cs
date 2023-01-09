@@ -32,7 +32,7 @@ namespace StarshotEngine.Rendering
                     // get values
                     Vector2 screenPos = WorldToScreenPos(spRend.sceneObject.Position);
                     Vector3 scale = spRend.sceneObject.Scale;
-                    float ang = spRend.sceneObject.Rotation;
+                    float ang = spRend.sceneObject.Rotation*2;
 
                     // scaling
                     Vector2 scaledTex = new Vector2(tex.Width * scale.X, tex.Height * scale.Y);

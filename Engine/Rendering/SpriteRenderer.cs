@@ -25,7 +25,6 @@ namespace StarshotEngine.Rendering
             drawOrder = Math.Clamp(drawOrder, 0, 1);
 
             Main.instance.currentScene.camera.AddRenderer(this);
-            Debug.WriteLine(sceneObject.Position);
         }
 
         public void SetSprite(string path)
@@ -41,6 +40,7 @@ namespace StarshotEngine.Rendering
             {
                 Debug.WriteLine($" !! Could not load Texture2D '{path}' from Content");
                 Texture2D tex = Main.instance.Content.Load<Texture2D>(spritePath);
+                SetSprite(tex);
             }
         }
         public void SetSprite(Texture2D tex)

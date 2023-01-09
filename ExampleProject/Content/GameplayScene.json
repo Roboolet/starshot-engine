@@ -4,10 +4,10 @@
     "camRotation": 0,
     "objects": [
         {
-            "name": "parentObj",
-            "position": [ -12, 0],
+            "name": "Player",
+            "position": [ 0, 0 ],
             "rotation": 0,
-            "scale": [ 1, 1],
+            "scale": [ 1, 1 ],
             "components": [
                 {
                     "type": "SpriteRenderer",
@@ -18,109 +18,11 @@
                     }
                 },
                 {
-                    "type": "SphereCollider",
-                    "data": {
-                        "collisionLayer": 0,
-                        "isTrigger": false,
-                        "radius": 10
-                    }
-                },
-                {
-                    "type": "SpinComponent",
-                    "data": {"speed": 10}
-                }
-            ],
-            "children": [
-                {
-                    "name": "childObj",
-                    "position": [ 0, 1],
-                    "rotation": 0,
-                    "scale": [ 1, 1],
-                    "components": [
-                        {
-                            "type": "SpriteRenderer",
-                            "data": {
-                                "spritePath": "placeholder",
-                                "color": [ 1, 1, 1 ],
-                                "drawOrder": 0.3
-                            }
-                        }
-                    ],
-                    "children": [
-                        {
-                            "name": "grandChildObj",
-                            "position": [ 0,1],
-                            "rotation": 0,
-                            "scale": [ 1, 1],
-                            "components": [
-                                {
-                                    "type": "SpriteRenderer",
-                                    "data": {
-                                        "spritePath": "placeholder",
-                                        "color": [ 0.8, 0.8, 0.8 ],
-                                        "drawOrder": 0.2
-                                    }
-                                },
-                                {
-                                    "type": "SpinComponent",
-                                    "data": {"speed": 1}
-                                }
-                            ],
-                            "children": [
-                                {
-                                    "name": "granderChildObj",
-                                    "position": [ 0, 1 ],
-                                    "rotation": 0,
-                                    "scale": [ 1, 1 ],
-                                    "components": [
-                                        {
-                                            "type": "SpriteRenderer",
-                                            "data": {
-                                                "spritePath": "placeholder",
-                                                "color": [ 0.6, 0.6, 0.6 ],
-                                                "drawOrder": 0.1
-                                            }
-                                        }
-                                    ],
-                                    "children": [
-                                        {
-                                            "name": "grandererChildObj",
-                                            "position": [ 0, 1 ],
-                                            "rotation": 0,
-                                            "scale": [ 1, 1 ],
-                                            "components": [
-                                                {
-                                                    "type": "SpriteRenderer",
-                                                    "data": {
-                                                        "spritePath": "placeholder",
-                                                        "color": [ 0.5, 0.5, 0.5 ],
-                                                        "drawOrder": 0
-                                                    }
-                                                }
-                                            ],
-                                            "children": []
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "otherObj",
-            "position": [ 12, 0],
-            "rotation": 0,
-            "scale": [ 1, 1],
-            "components": [
-                {
-                    "type": "Pendulum",
+                    "type": "Player",
                     "data": {}
                 }
             ],
             "children": []
         }
-
     ]
 }
