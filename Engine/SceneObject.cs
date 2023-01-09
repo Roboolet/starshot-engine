@@ -82,7 +82,7 @@ namespace StarshotEngine
                 float lenZ = new Vector3(mat.M13, mat.M23, mat.M33).Length();
                 return new Vector3(lenX, lenY, lenZ);
             }
-            set { matrix = Matrix.CreateScale(value - Scale) * matrix; }
+            set { matrix = Matrix.CreateScale(value) * matrix; }
         }
         #endregion
 
