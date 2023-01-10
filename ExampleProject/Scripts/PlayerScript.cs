@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ExampleProject.Scripts
 {
-    class Player : SceneObjectComponent
+    class PlayerScript : SceneObjectComponent
     {
         const float speed = 16f;
         const float maxSpeed = 12f;

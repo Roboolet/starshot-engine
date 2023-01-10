@@ -12,45 +12,74 @@ namespace StarshotEngine.Rendering
     {
         public int pixelsPerUnit = 16;
 
-        private List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+        List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+        List<StackRenderer> stackRenderers = new List<StackRenderer>();
 
         // draw what the camera sees to the spritebatch
         public void Render()
         {
             SpriteBatch batch = new SpriteBatch(Main.instance.GraphicsDevice);
             batch.Begin(SpriteSortMode.FrontToBack, transformMatrix:matrix);
+
             // render all SpriteRenderers
             for(int i = 0; i < renderers.Count; i++)
             {
                 SpriteRenderer spRend = renderers[i];
 
                 // get texture 
-                Texture2D tex = spRend.sprite;
+                Texture2D tex = spRend.GetSprite();
+                RenderSingleSprite(batch, spRend, tex, Point.Zero);
+            }
 
-                if (tex != null)
-                {                    
-                    // get values
-                    Vector2 screenPos = WorldToScreenPos(spRend.sceneObject.Position);
-                    Vector3 scale = spRend.sceneObject.Scale;
-                    float ang = spRend.sceneObject.Rotation*2;
+            // render all StackRenderers
+            for (int i = 0; i < stackRenderers.Count; i++)
+            {
+                StackRenderer spRend = stackRenderers[i];
 
-                    // scaling
-                    Vector2 scaledTex = new Vector2(tex.Width * scale.X, tex.Height * scale.Y);
+                // loop over each sprite in the stack
+                for(int spi = 0; spi < spRend.spriteCount; spi++)
+                {
+                    // get texture 
+                    Texture2D tex = spRend.GetSprite(spi);
 
-                    Rectangle drawRect = new Rectangle(
-                        new Point((int)(screenPos.X), (int)(screenPos.Y)),
-                        new Point((int)scaledTex.X, (int)scaledTex.Y));
-                    batch.Draw(tex, drawRect, null, spRend.GetColor(), ang, new Vector2(tex.Width/2, tex.Height/2), SpriteEffects.None, spRend.drawOrder);
-                    
+                    Point offset = new Point(0, (int)Math.Round(spi*spRend.magnitude));
+                    RenderSingleSprite(batch, spRend, tex, offset);
                 }
+                
             }
 
             batch.End();
         }
 
+        public void RenderSingleSprite(SpriteBatch batch, SpriteRenderer spRend, Texture2D tex, Point positionOffset)
+        {
+            if (tex != null)
+            {
+                // get values
+                Vector2 screenPos = WorldToScreenPos(spRend.sceneObject.Position);
+                Vector3 scale = spRend.sceneObject.Scale;
+                float ang = spRend.sceneObject.Rotation * 2;
+
+                // scaling
+                Vector2 scaledTex = new Vector2(tex.Width * scale.X, tex.Height * scale.Y);
+
+                Rectangle drawRect = new Rectangle(
+                    new Point((int)screenPos.X+positionOffset.X, (int)screenPos.Y+positionOffset.Y),
+                    new Point((int)scaledTex.X, (int)scaledTex.Y));
+                batch.Draw(tex, drawRect, null, spRend.GetColor(), ang, new Vector2(tex.Width / 2, tex.Height / 2), SpriteEffects.None, spRend.drawOrder);
+
+            }
+        }
+
         public void AddRenderer(SpriteRenderer renderer)
         {
             renderers.Add(renderer);
+            Debug.WriteLine("Added SpriteRenderer to SceneCamera");
+        }
+        public void AddRenderer(StackRenderer renderer)
+        {
+            stackRenderers.Add(renderer);
+            Debug.WriteLine("Added StackRenderer (containing " + renderer.spriteCount + " sprites) to SceneCamera");
         }
 
         public Vector2 WorldToScreenPos(Vector3 vec)

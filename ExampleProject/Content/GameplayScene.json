@@ -7,18 +7,19 @@
             "name": "Player",
             "position": [ 0, 0 ],
             "rotation": 0,
-            "scale": [ 1, 1 ],
+            "scale": [ 2, 2 ],
             "components": [
                 {
-                    "type": "SpriteRenderer",
+                    "type": "StackRenderer",
                     "data": {
-                        "spritePath": "placeholder",
-                        "color": [ 1, 0, 0 ],
-                        "drawOrder": 0.4
+                        "spritePath": "sprites\\player",
+                        "color": [ 1, 1, 1 ],
+                        "drawOrder": 0.4,
+                        "magnitude": -1
                     }
                 },
                 {
-                    "type": "Player",
+                    "type": "PlayerScript",
                     "data": {}
                 }
             ],

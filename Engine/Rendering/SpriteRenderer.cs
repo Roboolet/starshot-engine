@@ -16,7 +16,7 @@ namespace StarshotEngine.Rendering
         // set between 0 to 1 range
         public float drawOrder;
 
-        public Texture2D sprite { get; private set; }
+        Texture2D sprite;
 
         protected override void OnCreate()
         {
@@ -27,10 +27,9 @@ namespace StarshotEngine.Rendering
             Main.instance.currentScene.camera.AddRenderer(this);
         }
 
-        public void SetSprite(string path)
+        public virtual void SetSprite(string path)
         {
             spritePath = path;
-            if (path == null) spritePath = "placeholder";
             try
             {
                 Texture2D tex = Main.instance.Content.Load<Texture2D>(spritePath);
@@ -39,14 +38,18 @@ namespace StarshotEngine.Rendering
             catch (ContentLoadException)
             {
                 Debug.WriteLine($" !! Could not load Texture2D '{path}' from Content");
-                Texture2D tex = Main.instance.Content.Load<Texture2D>(spritePath);
+                Texture2D tex = Main.instance.Content.Load<Texture2D>("placeholder");
                 SetSprite(tex);
             }
         }
-        public void SetSprite(Texture2D tex)
+
+        public virtual  void SetSprite(Texture2D tex)
         {
             sprite = tex;
         }
+
+        public virtual Texture2D GetSprite(int i) => sprite;
+        public virtual Texture2D GetSprite() => sprite;
 
         public Color GetColor()
         {
