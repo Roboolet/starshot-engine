@@ -29,11 +29,10 @@ namespace StarshotEngine
         {
             instance = this;
 
-            // borderless fullscree
-
-            //_graphics.IsFullScreen = true;
-            //_graphics.HardwareModeSwitch = false;
-            //_graphics.ApplyChanges();
+            // borderless fullscreen
+            _graphics.IsFullScreen = true;
+            _graphics.HardwareModeSwitch = false;
+            _graphics.ApplyChanges();
 
             base.Initialize();
         }

@@ -43,7 +43,7 @@ namespace StarshotEngine.Rendering
                     Texture2D tex = spRend.GetSprite(spi);
 
                     Point offset = new Point(0, (int)Math.Round(spi*spRend.magnitude));
-                    RenderSingleSprite(batch, spRend, tex, offset);
+                    RenderSingleSprite(batch, spRend, tex, offset, spi*0.0001f);
                 }
                 
             }
@@ -51,7 +51,7 @@ namespace StarshotEngine.Rendering
             batch.End();
         }
 
-        public void RenderSingleSprite(SpriteBatch batch, SpriteRenderer spRend, Texture2D tex, Point positionOffset)
+        public void RenderSingleSprite(SpriteBatch batch, SpriteRenderer spRend, Texture2D tex, Point positionOffset, float drawOrderOffset = 0)
         {
             if (tex != null)
             {
@@ -66,7 +66,7 @@ namespace StarshotEngine.Rendering
                 Rectangle drawRect = new Rectangle(
                     new Point((int)screenPos.X+positionOffset.X, (int)screenPos.Y+positionOffset.Y),
                     new Point((int)scaledTex.X, (int)scaledTex.Y));
-                batch.Draw(tex, drawRect, null, spRend.GetColor(), ang, new Vector2(tex.Width / 2, tex.Height / 2), SpriteEffects.None, spRend.drawOrder);
+                batch.Draw(tex, drawRect, null, spRend.GetColor(), ang, new Vector2(tex.Width / 2, tex.Height / 2), SpriteEffects.None, spRend.drawOrder+drawOrderOffset);
 
             }
         }

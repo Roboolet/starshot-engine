@@ -15,7 +15,7 @@
                         "spritePath": "sprites\\player",
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0.4,
-                        "magnitude": -1
+                        "magnitude": -2
                     }
                 },
                 {
