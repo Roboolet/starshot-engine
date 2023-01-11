@@ -37,15 +37,20 @@ namespace StarshotEngine.Rendering
             }
             catch (ContentLoadException)
             {
-                Debug.WriteLine($" !! Could not load Texture2D '{path}' from Content");
-                Texture2D tex = Main.instance.Content.Load<Texture2D>("placeholder");
-                SetSprite(tex);
+                SetSpriteToFallback();
             }
         }
 
-        public virtual  void SetSprite(Texture2D tex)
+        public virtual void SetSprite(Texture2D tex)
         {
             sprite = tex;
+        }
+
+        protected void SetSpriteToFallback()
+        {
+            Debug.WriteLine($" !! Could not load Texture2D '{spritePath}' from Content");
+            Texture2D tex = Main.instance.Content.Load<Texture2D>("placeholder");
+            SetSprite(tex);
         }
 
         public virtual Texture2D GetSprite(int i) => sprite;

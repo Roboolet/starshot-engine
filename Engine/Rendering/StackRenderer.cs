@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -11,9 +12,11 @@ namespace StarshotEngine.Rendering
     public class StackRenderer : SpriteRenderer
     {
         public bool followCamera = false;
+        public bool singleSpriteMode = false;
+        public int singleSpriteAmount = 1;
         // only used if perspective has been overridden, vector2
         public float[] basisVector;
-        public float[] maximumCameraPerspective;
+        public float maximumCameraPerspective = 16;
         // vector3, multiplies distance
         public float magnitude = 1;
 
@@ -45,28 +48,49 @@ namespace StarshotEngine.Rendering
         {
             spritePath = path;
             sprites.Clear();
-            bool unbrokenSeq = true;
 
-            if (path == null)
+            // duplicate a single sprite an amount of times
+            if (singleSpriteMode)
             {
-                unbrokenSeq = false;
-            }
-
-            // look for a sequence
-            int i = 1;
-            while (unbrokenSeq)
-            {
-                string seq = spritePath + i.ToString();
                 try
                 {
-                    Texture2D tex = Main.instance.Content.Load<Texture2D>(seq);
-                    sprites.Add(tex);
-
-                    i++;
+                    Texture2D tex = Main.instance.Content.Load<Texture2D>(spritePath);
+                    for(int i = 0; i < singleSpriteAmount; i++)
+                    {
+                        sprites.Add(tex);
+                    }
                 }
                 catch (ContentLoadException)
                 {
+                    SetSpriteToFallback();
+                }
+            }
+            // load a sequence of numbered sprites
+            else 
+            { 
+                bool unbrokenSeq = true;
+                if (path == null)
+                {
                     unbrokenSeq = false;
+                }
+
+                // look for a sequence
+                int i = 1;
+                while (unbrokenSeq)
+                {
+                    string seq = spritePath + i.ToString();
+                    try
+                    {
+                        Texture2D tex = Main.instance.Content.Load<Texture2D>(seq);
+                        sprites.Add(tex);
+
+                        i++;
+                    }
+                    catch (ContentLoadException)
+                    {
+                        unbrokenSeq = false;
+                        Debug.WriteLine("End of StackRenderer sequence: " + seq);
+                    }
                 }
             }
         }
