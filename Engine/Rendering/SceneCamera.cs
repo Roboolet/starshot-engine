@@ -55,9 +55,9 @@ namespace StarshotEngine.Rendering
                         float diffX = spRend.sceneObject.Position.X - Position.X;
 
                         Vector2 max = new Vector2(spRend.maximumCameraPerspective[0], spRend.maximumCameraPerspective[1]);
-                        Vector2 vec = new Vector2(Math.Clamp(diffX, -max.X, max.X), Math.Clamp(diffY, -max.Y, max.Y));
+                        Vector2 vec = new Vector2(Math.Clamp(diffX * spRend.magnitude, -max.X, max.X), Math.Clamp(diffY * spRend.magnitude, -max.Y, max.Y));
 
-                        offset = new Point((int)Math.Round(spi * vec.X * spRend.magnitude), (int)Math.Round(spi * vec.Y * spRend.magnitude));
+                        offset = new Point((int)Math.Round(spi * vec.X), (int)Math.Round(spi * vec.Y));
                     }
                     RenderSingleSprite(batch, spRend, tex, offset, spi*0.0001f);
                 }

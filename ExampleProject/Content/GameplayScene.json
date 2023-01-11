@@ -5,7 +5,7 @@
     "objects": [
         {
             "name": "Player",
-            "position": [ -6, 0 ],
+            "position": [ 0, 0 ],
             "rotation": 0,
             "scale": [ 2, 2 ],
             "components": [
@@ -16,30 +16,8 @@
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0.4,
                         "followCamera": true,
-                        "maximumCameraPerspective": [ 24, 24 ],
-                        "magnitude": 0.2
-                    }
-                },
-                {
-                    "type": "PlayerScript",
-                    "data": {}
-                }
-            ],
-            "children": []
-        },
-        {
-            "name": "Player",
-            "position": [ 6, 0 ],
-            "rotation": 0,
-            "scale": [ 2, 2 ],
-            "components": [
-                {
-                    "type": "StackRenderer",
-                    "data": {
-                        "spritePath": "sprites\\player",
-                        "color": [ 1, 1, 1 ],
-                        "drawOrder": 0.4,
-                        "basisVector": [ 0, -2 ],
+                        "maximumCameraPerspective": [ 16, 16 ],
+                        "magnitude": 0.1
                     }
                 },
                 {
