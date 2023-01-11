@@ -10,9 +10,10 @@ namespace StarshotEngine.Rendering
 {
     public class StackRenderer : SpriteRenderer
     {
-        public bool overridePerspective;
+        public bool followCamera = false;
         // only used if perspective has been overridden, vector2
-        public float[] overridePerspectiveCenter;
+        public float[] basisVector;
+        public float[] maximumCameraPerspective;
         // vector3, multiplies distance
         public float magnitude = 1;
 

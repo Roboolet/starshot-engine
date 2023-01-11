@@ -41,8 +41,24 @@ namespace StarshotEngine.Rendering
                 {
                     // get texture 
                     Texture2D tex = spRend.GetSprite(spi);
+                    Point offset = Point.Zero;
 
-                    Point offset = new Point(0, (int)Math.Round(spi*spRend.magnitude));
+                    if (!spRend.followCamera)
+                    {
+                        Vector2 vec = new Vector2(spRend.basisVector[0], spRend.basisVector[1]);
+                        offset = new Point((int)Math.Round(spi * vec.X * spRend.magnitude), (int)Math.Round(spi * vec.Y * spRend.magnitude));
+                    }
+                    else
+                    {
+                        // render based on camera position in relation to the renderer
+                        float diffY = Position.Y - spRend.sceneObject.Position.Y;
+                        float diffX = spRend.sceneObject.Position.X - Position.X;
+
+                        Vector2 max = new Vector2(spRend.maximumCameraPerspective[0], spRend.maximumCameraPerspective[1]);
+                        Vector2 vec = new Vector2(Math.Clamp(diffX, -max.X, max.X), Math.Clamp(diffY, -max.Y, max.Y));
+
+                        offset = new Point((int)Math.Round(spi * vec.X * spRend.magnitude), (int)Math.Round(spi * vec.Y * spRend.magnitude));
+                    }
                     RenderSingleSprite(batch, spRend, tex, offset, spi*0.0001f);
                 }
                 
