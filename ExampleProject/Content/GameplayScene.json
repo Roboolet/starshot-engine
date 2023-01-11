@@ -22,7 +22,11 @@
                 },
                 {
                     "type": "PlayerScript",
-                    "data": {}
+                    "data": {
+                        "speed": 16,
+                        "maxSpeed": 12,
+                        "cameraFollowSpeed": 5
+                    }
                 }
             ],
             "children": []
