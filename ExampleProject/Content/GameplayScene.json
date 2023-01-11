@@ -44,7 +44,51 @@
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0.4,
                         "followCamera": true,
-                        "maximumCameraPerspective": 24,
+                        "maximumCameraPerspective": 20,
+                        "magnitude": 0.1,
+                        "singleSpriteMode": true,
+                        "singleSpriteAmount": 20
+                    }
+                }
+            ],
+            "children": []
+        },
+        {
+            "name": "Wall",
+            "position": [ 16, 4 ],
+            "rotation": 0,
+            "scale": [ 2, 2 ],
+            "components": [
+                {
+                    "type": "StackRenderer",
+                    "data": {
+                        "spritePath": "sprites\\wall",
+                        "color": [ 1, 1, 1 ],
+                        "drawOrder": 0.4,
+                        "followCamera": true,
+                        "maximumCameraPerspective": 20,
+                        "magnitude": 0.1,
+                        "singleSpriteMode": true,
+                        "singleSpriteAmount": 20
+                    }
+                }
+            ],
+            "children": []
+        },
+        {
+            "name": "Wall",
+            "position": [ 8, 18 ],
+            "rotation": 0,
+            "scale": [ 2, 2 ],
+            "components": [
+                {
+                    "type": "StackRenderer",
+                    "data": {
+                        "spritePath": "sprites\\wall",
+                        "color": [ 1, 1, 1 ],
+                        "drawOrder": 0.4,
+                        "followCamera": true,
+                        "maximumCameraPerspective": 20,
                         "magnitude": 0.1,
                         "singleSpriteMode": true,
                         "singleSpriteAmount": 20
