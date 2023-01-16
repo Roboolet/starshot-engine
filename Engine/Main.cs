@@ -50,6 +50,12 @@ namespace StarshotEngine
         {
             base.Update(gameTime);
             if(currentScene != null) currentScene.Update(gameTime);
+
+            if (_graphics.IsFullScreen && Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                _graphics.IsFullScreen = false;
+                _graphics.ApplyChanges();
+            }
         }
 
         protected override void Draw(GameTime gameTime)
