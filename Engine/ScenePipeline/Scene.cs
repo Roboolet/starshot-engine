@@ -13,7 +13,7 @@ namespace StarshotEngine.ScenePipeline
         protected readonly SceneData source;
         public SceneCamera camera;
 
-        List<SceneObject> hierarchy = new List<SceneObject>();
+        public SceneObject root { get; private set; }
 
         public Matrix matrix = Matrix.Identity;
 
@@ -23,12 +23,16 @@ namespace StarshotEngine.ScenePipeline
             name = _source.name;
         }
 
+        bool isPopulated = false;
         /// <summary>
         /// Fill in the scene using the data from the source file
         /// </summary>
         public virtual void Populate()
         {
             Debug.WriteLine("Populating Scene...");
+
+            // create root
+            root = new SceneObject(null, "root");
 
             // setup camera
             camera = new SceneCamera();
@@ -38,15 +42,22 @@ namespace StarshotEngine.ScenePipeline
             // create SceneObjects and components
             for(int i = 0; i < source.objects.Length; i++)
             {
-                new SceneObject(null, source.objects[i]);
+                new SceneObject(root, source.objects[i]);
             }
+
+            // call OnStart
+            for (int i = 0; i < root.ChildCount; i++)
+            {
+                root.GetChild(i).Start();
+            }
+            isPopulated = true;
         }
 
         public virtual void Update(GameTime gameTime)
         {
-            for(int i =0; i < hierarchy.Count; i++)
+            for(int i =0; i < root.ChildCount; i++)
             {
-                SceneObject obj = hierarchy[i];
+                SceneObject obj = root.GetChild(i);
                 if(obj.Enabled) obj.Update(gameTime);
             }
         }
@@ -59,7 +70,11 @@ namespace StarshotEngine.ScenePipeline
 
         public void AddSceneObject(SceneObject obj)
         {
-            hierarchy.Add(obj);
+            if (root != null)
+            {
+                root.AddChild(obj);
+            }
+            if (isPopulated) obj.Start();
         }
 
         /// <summary>

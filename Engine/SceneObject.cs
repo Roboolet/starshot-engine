@@ -160,6 +160,23 @@ namespace StarshotEngine
             scene.AddSceneObject(this);
         }
 
+        public void Start()
+        {
+            if (components != null)
+            {
+                for (int i = 0; i < components.Count; i++)
+                {
+                    components[i].Start();
+                }
+            }
+            if (children != null)
+            {
+                for (int i = 0; i < children.Count; i++)
+                {
+                    children[i].Start();
+                }
+            }
+        }
         public void Destroy()
         {
             if (components != null)
@@ -242,10 +259,9 @@ namespace StarshotEngine
             // should not allow a parent of this object to become a child, and vice versa
         }
 
-        public SceneObject GetChild(int index)
-        {
-            return children[index];
-        }
+        public SceneObject GetChild(int index) => children[index];
+        public void AddChild(SceneObject obj) => children.Add(obj);
+
         public int ChildCount => children.Count;
 
         public SceneObject Find(string query, FindMode findMode = FindMode.Exact) => SceneObject.Find(this, query, findMode);

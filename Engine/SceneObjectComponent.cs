@@ -56,10 +56,14 @@ public abstract class SceneObjectComponent
 
         OnCreate();
     }
-
+    public void Start() { OnStart(); }
     public void Update(GameTime gameTime) { OnUpdate(gameTime); }
     public void Destroy() { OnDestroy(); }
 
+    /// <summary>
+    /// Called after the scene has finished populating, or immediately after spawned. Called after OnCreate
+    /// </summary>
+    protected virtual void OnStart() { }
     protected virtual void OnCreate() { }
     protected virtual void OnUpdate(GameTime gameTime) { }
     protected virtual void OnDestroy() { }
