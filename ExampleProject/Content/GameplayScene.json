@@ -32,6 +32,29 @@
             "children": []
         },
         {
+            "name": "Gas",
+            "position": [ 30, 0 ],
+            "rotation": 0,
+            "scale": [ 2, 2 ],
+            "components": [
+                {
+                    "type": "SpriteRenderer",
+                    "data": {
+                        "spritePath": "sprites\\gas",
+                        "color": [ 1, 1, 1 ],
+                        "drawOrder": 0.9,
+                    }
+                },
+                {
+                    "type": "Collectable",
+                    "data": {
+                        "grabDist": 4
+                    }
+                }
+            ],
+            "children": []
+        },
+        {
             "name": "Wall",
             "position": [ -16, 8 ],
             "rotation": 0,

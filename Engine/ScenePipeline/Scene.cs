@@ -73,25 +73,5 @@ namespace StarshotEngine.ScenePipeline
         {
             return null;
         }
-
-        /// <summary>
-        /// Returns the first SceneObject in the scene hierarchy that matches the query
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public SceneObject Find(string query, SceneObject searchOrigin = null, FindMode findMode = FindMode.Exact)
-        {
-            return null;
-        }
-        /// <summary>
-        /// Returns all SceneObjects in the scene that match the query
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public SceneObject[] FindAll(string query, SceneObject searchOrigin = null, FindMode findMode = FindMode.Exact)
-        {
-            return null;
-        }
-        public enum FindMode{Exact, StartsWith, Contains}
     }
 }

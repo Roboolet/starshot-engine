@@ -86,10 +86,6 @@ namespace StarshotEngine
         }
         #endregion
 
-        protected List<SceneObjectComponent> components = new List<SceneObjectComponent>();
-
-        protected List<SceneObject> children = new List<SceneObject>();
-
         public event EventHandler EnabledChanged;
 
         bool _Enabled;
@@ -163,31 +159,6 @@ namespace StarshotEngine
             // add to scene
             scene.AddSceneObject(this);
         }
-        public void AddComponent(ref Type type, SceneObjectComponentData componentData = null)
-        {
-            SceneObjectComponent obj = (SceneObjectComponent)Activator.CreateInstance(type);
-            if (obj == null) return;
-
-            obj.InitializeValues(this, componentData);
-
-            components.Add(obj);
-        }
-
-        public T AddComponent<T>(SceneObjectComponentData componentData = null) where T : SceneObjectComponent
-        {
-            T obj = Activator.CreateInstance<T>();
-            if (obj == null) return null;
-
-            obj.InitializeValues(this, componentData);
-
-            components.Add(obj);
-            return obj;
-        }
-
-        public void SetParent()
-        {
-            // should not allow a parent of this object to become a child, and vice versa
-        }
 
         public void Destroy()
         {
@@ -222,7 +193,31 @@ namespace StarshotEngine
                     children[i].Update(gameTime);
                 }
             }
-        }        
+        }
+
+        #region Components
+        protected List<SceneObjectComponent> components = new List<SceneObjectComponent>();
+
+        public void AddComponent(ref Type type, SceneObjectComponentData componentData = null)
+        {
+            SceneObjectComponent obj = (SceneObjectComponent)Activator.CreateInstance(type);
+            if (obj == null) return;
+
+            obj.InitializeValues(this, componentData);
+
+            components.Add(obj);
+        }
+
+        public T AddComponent<T>(SceneObjectComponentData componentData = null) where T : SceneObjectComponent
+        {
+            T obj = Activator.CreateInstance<T>();
+            if (obj == null) return null;
+
+            obj.InitializeValues(this, componentData);
+
+            components.Add(obj);
+            return obj;
+        }
 
         public SceneObjectComponent GetComponent<T>(ref T type) where T : SceneObjectComponent
         {
@@ -236,5 +231,55 @@ namespace StarshotEngine
             }
             return null;
         }
+        #endregion
+
+        #region Hierarchy & Children
+        protected List<SceneObject> children = new List<SceneObject>();
+        public enum FindMode { Exact, StartsWith, Contains }
+
+        public void SetParent()
+        {
+            // should not allow a parent of this object to become a child, and vice versa
+        }
+
+        public SceneObject GetChild(int index)
+        {
+            return children[index];
+        }
+        public int ChildCount => children.Count;
+
+        public SceneObject Find(string query, FindMode findMode = FindMode.Exact) => SceneObject.Find(this, query, findMode);
+
+        /// <summary>
+        /// Returns the first SceneObject in the scene hierarchy that matches the query
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static SceneObject Find(SceneObject searchOrigin, string query, FindMode findMode = FindMode.Exact)
+        {
+            // currently only works on root level objects or direct children
+            SceneObject output = null;
+
+            for (int i = 0; i < searchOrigin.ChildCount; i++)
+            {
+                SceneObject sob = searchOrigin.GetChild(i);
+                if(sob.name == query)
+                {
+                    output = sob;
+                    break;
+                }
+            }
+            return output;
+        }
+        /// <summary>
+        /// Returns all SceneObjects in the scene that match the query
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static SceneObject[] FindAll(SceneObject searchOrigin, string query, FindMode findMode = FindMode.Exact)
+        {
+            return null;
+        }
+        #endregion
     }
 }
