@@ -33,7 +33,7 @@
         },
         {
             "name": "Gas",
-            "position": [ 30, 0 ],
+            "position": [ 0, 0 ],
             "rotation": 0,
             "scale": [ 2, 2 ],
             "components": [
@@ -48,7 +48,7 @@
                 {
                     "type": "Collectable",
                     "data": {
-                        "grabDist": 4
+                        "grabDist": 5
                     }
                 }
             ],

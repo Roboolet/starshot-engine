@@ -53,7 +53,7 @@ namespace StarshotEngine
             }
             set
             {
-                matrix = Matrix.CreateTranslation(value - Position) * matrix;
+                matrix *= Matrix.CreateTranslation(value - Position);
             }
         }
         public float Rotation
