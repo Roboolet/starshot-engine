@@ -12,6 +12,7 @@ namespace ExampleProject.Scripts
     {
         SceneObject plr;
         public float grabDist;
+        public int newSpawnDist;
 
         protected override void OnStart()
         {
@@ -38,13 +39,9 @@ namespace ExampleProject.Scripts
         void Grab()
         {
             Random rnd = new Random();
-            Vector3 r = new Vector3(rnd.Next(-5, 5), rnd.Next(-5, 5), 0);
+            Vector3 r = new Vector3(rnd.Next(-newSpawnDist, newSpawnDist), rnd.Next(-newSpawnDist, newSpawnDist), 0);
 
-            Debug.WriteLine("Old position " + sceneObject.Position);
             sceneObject.Position = r;
-
-            Debug.WriteLine("Rand = " + r);
-            Debug.WriteLine("New position = " + sceneObject.Position);
         }
     }
 }

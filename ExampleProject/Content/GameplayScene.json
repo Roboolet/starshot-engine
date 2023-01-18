@@ -23,9 +23,34 @@
                 {
                     "type": "PlayerScript",
                     "data": {
-                        "speed": 16,
-                        "maxSpeed": 12,
-                        "cameraFollowSpeed": 5
+                        "speed": 20,
+                        "speedMax": 24,
+                        "cameraFollowSpeed": 5,
+                        "angSpeed": 0.0003,
+                        "angSpeedMax": 0.0025
+                    }
+                }
+            ],
+            "children": []
+        },
+        {
+            "name": "Player",
+            "position": [ 0, 0 ],
+            "rotation": 0,
+            "scale": [ 2, 2 ],
+            "components": [
+                {
+                    "type": "SpriteRenderer",
+                    "data": {
+                        "spritePath": "sprites\\gas",
+                        "color": [ 1, 1, 1 ],
+                        "drawOrder": 0.4
+                    }
+                },
+                {
+                    "type": "ScreenspaceScaler",
+                    "data": {
+                        "screenAnchor": "LTop"
                     }
                 }
             ],
@@ -48,7 +73,8 @@
                 {
                     "type": "Collectable",
                     "data": {
-                        "grabDist": 5
+                        "grabDist": 5,
+                        "newSpawnDist": 20
                     }
                 }
             ],

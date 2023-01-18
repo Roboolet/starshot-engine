@@ -14,7 +14,9 @@ namespace ExampleProject.Scripts
     {
         public float cameraFollowSpeed;
         public float speed;
-        public float maxSpeed;
+        public float speedMax;
+        public float angSpeed;
+        public float angSpeedMax;
 
         float vel;
         float rvel;
@@ -31,22 +33,22 @@ namespace ExampleProject.Scripts
             KeyboardState state = Keyboard.GetState();
             if (state.IsKeyDown(Keys.S)) vel = vel - gameTime.GetElapsedSeconds() * speed;
             if (state.IsKeyDown(Keys.W)) vel = vel + gameTime.GetElapsedSeconds() * speed;
-            vel = Math.Clamp(vel, -maxSpeed, maxSpeed);
+            vel = Math.Clamp(vel, -speedMax, speedMax);
 
             // change angle
             if (state.IsKeyDown(Keys.A))
             {
                 rvel = Math.Max(rvel, 0);
-                rvel += 0.0002f;
+                rvel += angSpeed;
             }
             else if (state.IsKeyDown(Keys.D))
             {
                 rvel = Math.Min(rvel, 0);
-                rvel += -0.0002f;
+                rvel += -angSpeed;
             }
             else rvel *= 0.8f;
 
-            rvel = Math.Clamp(rvel, -0.002f, 0.002f);
+            rvel = Math.Clamp(rvel, -angSpeedMax, angSpeedMax);
             sceneObject.Rotation += rvel * vel;
 
             // move player
