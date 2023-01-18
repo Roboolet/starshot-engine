@@ -10,7 +10,7 @@ namespace StarshotEngine.Rendering
 {
     public class SceneCamera : SceneObject
     {
-        public float pixelsPerUnit = 16;
+        public float pixelsPerUnit = 24;
 
         List<SpriteRenderer> renderers = new List<SpriteRenderer>();
         List<StackRenderer> stackRenderers = new List<StackRenderer>();

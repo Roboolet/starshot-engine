@@ -3,7 +3,7 @@ sidebar_label: 'StackRenderer'
 ---
 # StackRenderer *: SpriteRenderer*
 The StackRenderer holds information used by the SceneCamera to draw a stack of sprites. Used to create pseudo-3D objects
-## Fields
+## Properties
 | Name | Value type | Description |
 | - | - | - |
 | `spritePath` | string | Path used to load the sprite sequence, see naming format below |

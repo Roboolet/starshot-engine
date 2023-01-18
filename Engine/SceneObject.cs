@@ -260,7 +260,11 @@ namespace StarshotEngine
         }
 
         public SceneObject GetChild(int index) => children[index];
-        public void AddChild(SceneObject obj) => children.Add(obj);
+        public void AddChild(SceneObject obj)
+        {
+            obj.parent = this;
+            children.Add(obj);
+        }
 
         public int ChildCount => children.Count;
 

@@ -18,46 +18,7 @@ namespace StarshotEngine.Rendering
         SceneCamera camera;
 
         public float[] targetScale;
-
-        Vector2 anchorPos;
-        ScreenAnchor anchor;
-        string _screenAnchor;
-        public string screenAnchor
-        {
-            get { return _screenAnchor; }
-            set
-            {
-                _screenAnchor = value;
-                SetAnchor(value);
-            }
-        }
-
-        public void SetAnchor(string anch)
-        {
-            if (Enum.TryParse(screenAnchor, out ScreenAnchor val))
-            {
-                SetAnchor(val);
-            }
-        }
-
-        public void SetAnchor(ScreenAnchor anch)
-        {
-            anchor = anch;
-            switch (anchor)
-            {
-                case ScreenAnchor.LTop: anchorPos = Vector2.Zero; break;
-                case ScreenAnchor.CTop: anchorPos = new Vector2(0.5f, 0f); break;
-                case ScreenAnchor.RTop: anchorPos = new Vector2(1f, 0f); break;
-
-                case ScreenAnchor.LMid: anchorPos = new Vector2(0f, 0.5f); break;
-                case ScreenAnchor.CMid: anchorPos = new Vector2(0.5f, 0.5f); break;
-                case ScreenAnchor.RMid: anchorPos = new Vector2(1f, 0.5f); break;
-
-                case ScreenAnchor.LBot: anchorPos = new Vector2(0f, 1f); break;
-                case ScreenAnchor.CBot: anchorPos = new Vector2(0.5f, 1f); break;
-                case ScreenAnchor.RBot: anchorPos = Vector2.One; break;
-            }
-        }
+        public float[] anchor = new float[2];
 
         protected override void OnStart()
         {
@@ -66,8 +27,8 @@ namespace StarshotEngine.Rendering
 
         protected override void OnUpdate(GameTime gameTime)
         {
-            sceneObject.Position = camera.ScreenToWorldPos(anchorPos.X, anchorPos.Y);
-            Debug.WriteLine(sceneObject.Position);
+            sceneObject.Position = camera.ScreenToWorldPos(anchor[0], anchor[1]);
+            // Debug.WriteLine(sceneObject.Position);
         }
     }
 }
