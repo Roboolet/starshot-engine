@@ -17,7 +17,7 @@
                         "drawOrder": 0.4,
                         "followCamera": true,
                         "maximumCameraPerspective": 16,
-                        "magnitude": 0.1
+                        "magnitude": 0.005
                     }
                 },
                 {
@@ -34,23 +34,23 @@
             "children": []
         },
         {
-            "name": "Player",
+            "name": "UI_pickups",
             "position": [ 0, 0 ],
             "rotation": 0,
-            "scale": [ 2, 2 ],
+            "scale": [ 1, 1 ],
             "components": [
                 {
                     "type": "SpriteRenderer",
                     "data": {
                         "spritePath": "sprites\\gas",
                         "color": [ 1, 1, 1 ],
-                        "drawOrder": 0.4
+                        "drawOrder": 0.8
                     }
                 },
                 {
                     "type": "ScreenspaceScaler",
                     "data": {
-                        "screenAnchor": "LTop"
+                        "screenAnchor": "CMid"
                     }
                 }
             ],
@@ -67,7 +67,7 @@
                     "data": {
                         "spritePath": "sprites\\gas",
                         "color": [ 1, 1, 1 ],
-                        "drawOrder": 0.9,
+                        "drawOrder": 0.9
                     }
                 },
                 {
@@ -75,6 +75,26 @@
                     "data": {
                         "grabDist": 5,
                         "newSpawnDist": 20
+                    }
+                }
+            ],
+            "children": []
+        },
+        {
+            "name": "PlayerFake",
+            "position": [ -16, -6 ],
+            "rotation": 1.6,
+            "scale": [ 2, 2 ],
+            "components": [
+                {
+                    "type": "StackRenderer",
+                    "data": {
+                        "spritePath": "sprites\\player",
+                        "color": [ 1, 1, 1 ],
+                        "drawOrder": 0.4,
+                        "followCamera": true,
+                        "maximumCameraPerspective": 16,
+                        "magnitude": 0.005
                     }
                 }
             ],
@@ -93,8 +113,8 @@
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0.4,
                         "followCamera": true,
-                        "maximumCameraPerspective": 20,
-                        "magnitude": 0.1,
+                        "maximumCameraPerspective": 4,
+                        "magnitude": 0.005,
                         "singleSpriteMode": true,
                         "singleSpriteAmount": 20
                     }
@@ -115,8 +135,8 @@
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0.4,
                         "followCamera": true,
-                        "maximumCameraPerspective": 20,
-                        "magnitude": 0.1,
+                        "maximumCameraPerspective": 4,
+                        "magnitude": 0.005,
                         "singleSpriteMode": true,
                         "singleSpriteAmount": 20
                     }
@@ -137,8 +157,8 @@
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0.4,
                         "followCamera": true,
-                        "maximumCameraPerspective": 20,
-                        "magnitude": 0.1,
+                        "maximumCameraPerspective": 4,
+                        "magnitude": 0.005,
                         "singleSpriteMode": true,
                         "singleSpriteAmount": 20
                     }

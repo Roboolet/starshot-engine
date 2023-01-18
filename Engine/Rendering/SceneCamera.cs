@@ -10,7 +10,7 @@ namespace StarshotEngine.Rendering
 {
     public class SceneCamera : SceneObject
     {
-        public int pixelsPerUnit = 16;
+        public float pixelsPerUnit = 16;
 
         List<SpriteRenderer> renderers = new List<SpriteRenderer>();
         List<StackRenderer> stackRenderers = new List<StackRenderer>();
@@ -54,8 +54,8 @@ namespace StarshotEngine.Rendering
                         float diffY = Position.Y - spRend.sceneObject.Position.Y;
                         float diffX = spRend.sceneObject.Position.X - Position.X;
 
-                        Vector2 vec = new Vector2(Math.Clamp(diffX * spRend.magnitude, -spRend.maximumCameraPerspective, spRend.maximumCameraPerspective),
-                            Math.Clamp(diffY * spRend.magnitude, -spRend.maximumCameraPerspective, spRend.maximumCameraPerspective));
+                        Vector2 vec = new Vector2(Math.Clamp(diffX * spRend.magnitude * pixelsPerUnit, -spRend.maximumCameraPerspective, spRend.maximumCameraPerspective),
+                            Math.Clamp(diffY * spRend.magnitude * pixelsPerUnit, -spRend.maximumCameraPerspective, spRend.maximumCameraPerspective));
 
                         offset = new Point((int)Math.Round(spi * vec.X), (int)Math.Round(spi * vec.Y));
                     }
@@ -72,7 +72,7 @@ namespace StarshotEngine.Rendering
             if (tex != null)
             {
                 // get values
-                Vector2 screenPos = WorldToScreenPos(spRend.sceneObject.Position);
+                Vector3 screenPos = WorldToScreenPos(spRend.sceneObject.Position);
                 Vector3 scale = spRend.sceneObject.Scale;
                 float ang = spRend.sceneObject.Rotation;
 
@@ -82,7 +82,7 @@ namespace StarshotEngine.Rendering
                 Rectangle drawRect = new Rectangle(
                     new Point((int)screenPos.X+positionOffset.X, (int)screenPos.Y+positionOffset.Y),
                     new Point((int)scaledTex.X, (int)scaledTex.Y));
-                batch.Draw(tex, drawRect, null, spRend.GetColor(), ang, new Vector2(tex.Width / 2, tex.Height / 2), SpriteEffects.None, spRend.drawOrder+drawOrderOffset);
+                batch.Draw(tex, drawRect, null, spRend.GetColor(), ang, new Vector2(tex.Width / 2f, tex.Height / 2f), SpriteEffects.None, spRend.drawOrder+drawOrderOffset);
 
             }
         }
@@ -98,14 +98,27 @@ namespace StarshotEngine.Rendering
             Debug.WriteLine("Added StackRenderer (containing " + renderer.spriteCount + " sprites) to SceneCamera");
         }
 
-        public Vector2 WorldToScreenPos(Vector3 vec)
+        public Vector3 WorldToScreenPos(Vector3 vec) => WorldToScreenPos(vec.X, vec.Y);
+        public Vector3 WorldToScreenPos(float x, float y)
         {
             Viewport vp = Main.instance.GraphicsDevice.Viewport;
             // get coord, subtract camera, and center in screen.
             // additionally, invert the Y axis
-            Vector2 newVec = new Vector2(
-                vec.X*pixelsPerUnit - Position.X*pixelsPerUnit + vp.Width / 2,
-                -vec.Y*pixelsPerUnit - -Position.Y*pixelsPerUnit + vp.Height / 2);
+            Vector3 newVec = new Vector3(
+                x * pixelsPerUnit - Position.X * pixelsPerUnit + vp.Width / 2f,
+                -y * pixelsPerUnit + Position.Y * pixelsPerUnit + vp.Height / 2f,
+                0);
+            return newVec;
+        }
+
+        public Vector3 ScreenToWorldPos(float u, float v)
+        {
+            Viewport vp = Main.instance.GraphicsDevice.Viewport;
+            // multiply u and v by the width and height, add the result to the position of the camera
+            Vector3 newVec = new Vector3(
+                u * (vp.Width/pixelsPerUnit) - (vp.Width / pixelsPerUnit /2f) + Position.X,
+                -v * (vp.Height/pixelsPerUnit) + (vp.Height / pixelsPerUnit /2f) + Position.Y,
+                0);
             return newVec;
         }
     }
