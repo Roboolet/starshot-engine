@@ -77,10 +77,10 @@ namespace StarshotEngine.Rendering
                 float ang = spRend.sceneObject.Rotation;
 
                 // scaling
-                Vector2 scaledTex = new Vector2(tex.Width * scale.X, tex.Height * scale.Y);
+                Vector2 scaledTex = new Vector2(MathF.Round(tex.Width * scale.X), MathF.Round(tex.Height * scale.Y));
 
                 Rectangle drawRect = new Rectangle(
-                    new Point((int)screenPos.X+positionOffset.X, (int)screenPos.Y+positionOffset.Y),
+                    new Point((int)MathF.Round(screenPos.X+positionOffset.X), (int)MathF.Round(screenPos.Y+positionOffset.Y)),
                     new Point((int)scaledTex.X, (int)scaledTex.Y));
                 batch.Draw(tex, drawRect, null, spRend.GetColor(), ang, new Vector2(tex.Width / 2f, tex.Height / 2f), SpriteEffects.None, spRend.drawOrder+drawOrderOffset);
 
@@ -105,8 +105,8 @@ namespace StarshotEngine.Rendering
             // get coord, subtract camera, and center in screen.
             // additionally, invert the Y axis
             Vector3 newVec = new Vector3(
-                x * pixelsPerUnit - Position.X * pixelsPerUnit + vp.Width / 2f,
-                -y * pixelsPerUnit + Position.Y * pixelsPerUnit + vp.Height / 2f,
+                x * pixelsPerUnit - Position.X * pixelsPerUnit + vp.Width / 2f - x,
+                -y * pixelsPerUnit + Position.Y * pixelsPerUnit + vp.Height / 2f - y,
                 0);
             return newVec;
         }
