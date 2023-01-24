@@ -72,7 +72,7 @@ namespace StarshotEngine.Rendering
             if (tex != null)
             {
                 // get values
-                Vector3 screenPos = WorldToScreenPos(spRend.sceneObject.Position);
+                Point screenPos = WorldToScreenPos(spRend.sceneObject.Position);
                 Vector3 scale = spRend.sceneObject.Scale;
                 float ang = spRend.sceneObject.Rotation;
 
@@ -80,7 +80,7 @@ namespace StarshotEngine.Rendering
                 Vector2 scaledTex = new Vector2(MathF.Round(tex.Width * scale.X), MathF.Round(tex.Height * scale.Y));
 
                 Rectangle drawRect = new Rectangle(
-                    new Point((int)MathF.Round(screenPos.X+positionOffset.X), (int)MathF.Round(screenPos.Y+positionOffset.Y)),
+                    new Point(screenPos.X+positionOffset.X, screenPos.Y+positionOffset.Y),
                     new Point((int)scaledTex.X, (int)scaledTex.Y));
                 batch.Draw(tex, drawRect, null, spRend.GetColor(), ang, new Vector2(tex.Width / 2f, tex.Height / 2f), SpriteEffects.None, spRend.drawOrder+drawOrderOffset);
 
@@ -98,16 +98,15 @@ namespace StarshotEngine.Rendering
             Debug.WriteLine("Added StackRenderer (containing " + renderer.spriteCount + " sprites) to SceneCamera");
         }
 
-        public Vector3 WorldToScreenPos(Vector3 vec) => WorldToScreenPos(vec.X, vec.Y);
-        public Vector3 WorldToScreenPos(float x, float y)
+        public Point WorldToScreenPos(Vector3 vec) => WorldToScreenPos(vec.X, vec.Y);
+        public Point WorldToScreenPos(float x, float y)
         {
             Viewport vp = Main.instance.GraphicsDevice.Viewport;
             // get coord, subtract camera, and center in screen.
             // additionally, invert the Y axis
-            Vector3 newVec = new Vector3(
-                x * pixelsPerUnit - Position.X * pixelsPerUnit + vp.Width / 2f - x,
-                -y * pixelsPerUnit + Position.Y * pixelsPerUnit + vp.Height / 2f - y,
-                0);
+            Point newVec = new Point(
+                (int)MathF.Round(x * pixelsPerUnit - Position.X * pixelsPerUnit + vp.Width / 2f - x),
+                (int)MathF.Round(-y * pixelsPerUnit + Position.Y * pixelsPerUnit + vp.Height / 2f - y));
             return newVec;
         }
 
