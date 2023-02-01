@@ -17,6 +17,7 @@ namespace StarshotEngine.Rendering
         public float[] color;
         public float drawOrder;
         public float fontScale = 1;
+        public string alignment = "center";
 
         protected override void OnCreate()
         {
@@ -54,6 +55,19 @@ namespace StarshotEngine.Rendering
         {
             SpriteFont f = Main.instance.Content.Load<SpriteFont>("roboto");
             SetFont(f);
+        }
+
+        public Vector2 GetAlignmentVector()
+        {
+            switch (alignment)
+            {
+                default:
+                    return font.MeasureString(content)/2;
+                case "left":
+                    return Vector2.Zero;
+                case "right":
+                    return font.MeasureString(content);
+            }
         }
 
 

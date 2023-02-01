@@ -43,7 +43,7 @@
                     "type": "TextRenderer",
                     "data": {
                         "fontPath": "roboto",
-                        "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                        "content": "TextRenderer Test",
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0
                     }
@@ -51,7 +51,7 @@
                 {
                     "type": "ScreenspaceScaler",
                     "data": {
-                        "anchor": [0.2,0.2]
+                        "anchor": [0.5,0.1]
                     }
                 }
             ],

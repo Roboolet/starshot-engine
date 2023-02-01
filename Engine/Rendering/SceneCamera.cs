@@ -99,8 +99,8 @@ namespace StarshotEngine.Rendering
         {
             if (trend.font != null)
             {
-                Vector2 screenPos = WorldToScreenPos(trend.sceneObject.Position).ToVector2();
-                batch.DrawString(trend.font, trend.content, screenPos, trend.GetColor(), trend.sceneObject.Rotation, screenPos, trend.fontScale, SpriteEffects.None, trend.drawOrder);
+                Vector2 screenPos = WorldToScreenPos(trend.sceneObject.Position).ToVector2() - trend.GetAlignmentVector();
+                batch.DrawString(trend.font, trend.content, screenPos, trend.GetColor(), trend.sceneObject.Rotation, new Vector2(0.5f, 0.5f), trend.fontScale, SpriteEffects.None, trend.drawOrder);
             }
         }
 
