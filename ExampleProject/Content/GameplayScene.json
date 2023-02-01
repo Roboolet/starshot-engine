@@ -35,22 +35,23 @@
         },
         {
             "name": "UI_pickups",
-            "position": [ 0, 5 ],
+            "position": [ 0, 0 ],
             "rotation": 0,
             "scale": [ 1, 1 ],
             "components": [
                 {
                     "type": "TextRenderer",
                     "data": {
-                        "fontPath": "sprites\\gas",
+                        "fontPath": "roboto",
+                        "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                         "color": [ 1, 1, 1 ],
-                        "drawOrder": 0.8
+                        "drawOrder": 0
                     }
                 },
                 {
                     "type": "ScreenspaceScaler",
                     "data": {
-                        "anchor": [0.5,0.1]
+                        "anchor": [0.2,0.2]
                     }
                 }
             ],

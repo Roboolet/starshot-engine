@@ -14,6 +14,7 @@ namespace StarshotEngine.Rendering
 
         List<SpriteRenderer> renderers = new List<SpriteRenderer>();
         List<StackRenderer> stackRenderers = new List<StackRenderer>();
+        List<TextRenderer> textRenderers = new List<TextRenderer>();
 
         // draw what the camera sees to the spritebatch
         public void Render()
@@ -63,6 +64,14 @@ namespace StarshotEngine.Rendering
                 }
                 
             }
+            // render all TextRenderers
+            for (int i = 0; i < textRenderers.Count; i++)
+            {
+                TextRenderer trend = textRenderers[i];
+
+                RenderText(batch, trend);
+
+            }
 
             batch.End();
         }
@@ -83,7 +92,15 @@ namespace StarshotEngine.Rendering
                     new Point(screenPos.X+positionOffset.X, screenPos.Y+positionOffset.Y),
                     new Point((int)scaledTex.X, (int)scaledTex.Y));
                 batch.Draw(tex, drawRect, null, spRend.GetColor(), ang, new Vector2(tex.Width / 2f, tex.Height / 2f), SpriteEffects.None, spRend.drawOrder+drawOrderOffset);
+            }
+        }
 
+        public void RenderText(SpriteBatch batch, TextRenderer trend)
+        {
+            if (trend.font != null)
+            {
+                Vector2 screenPos = WorldToScreenPos(trend.sceneObject.Position).ToVector2();
+                batch.DrawString(trend.font, trend.content, screenPos, trend.GetColor(), trend.sceneObject.Rotation, screenPos, trend.fontScale, SpriteEffects.None, trend.drawOrder);
             }
         }
 
@@ -96,6 +113,11 @@ namespace StarshotEngine.Rendering
         {
             stackRenderers.Add(renderer);
             Debug.WriteLine("Added StackRenderer (containing " + renderer.spriteCount + " sprites) to SceneCamera");
+        }
+        public void AddRenderer(TextRenderer renderer)
+        {
+            textRenderers.Add(renderer);
+            Debug.WriteLine("Added TextRenderer (" + renderer.content + ") to SceneCamera");
         }
 
         public Point WorldToScreenPos(Vector3 vec) => WorldToScreenPos(vec.X, vec.Y);

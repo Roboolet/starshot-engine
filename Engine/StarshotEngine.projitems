@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ComponentLibrary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\ScreenspaceScaler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\StackRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rendering\TextRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\SpriteRenderer.cs" />
