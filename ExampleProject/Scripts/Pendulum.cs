@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ExampleProject
 {
-    class Pendulum : SceneObjectComponent
+    class Pendulum : Renderer
     {
         protected override void OnCreate()
         {
@@ -15,7 +15,7 @@ namespace ExampleProject
             for(int i = 0; i < 10; i++)
             {
                 iterParent = new SceneObject(iterParent);
-                iterParent.AddComponent<SpriteRenderer>();
+                iterParent.AddComponent<Renderer>();
 
                 iterParent.Position = new Vector3(0, 1, 0);
 
@@ -30,12 +30,12 @@ namespace ExampleProject
         }
     }
 
-    class Drawer : SceneObjectComponent
+    class Drawer : Renderer
     {
         protected override void OnUpdate(GameTime gameTime)
         {
             SceneObject sob = new SceneObject(null);
-            sob.AddComponent<SpriteRenderer>();
+            sob.AddComponent<Renderer>();
             sob.Position = sceneObject.Position;
             sob.Scale = Vector3.One * 0.2f;
         }

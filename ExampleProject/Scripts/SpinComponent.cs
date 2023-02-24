@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ExampleProject
 {
-    class SpinComponent : SceneObjectComponent
+    class SpinComponent : Renderer
     {
         float rot;
         public float speed;

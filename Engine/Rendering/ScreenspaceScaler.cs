@@ -7,7 +7,7 @@ using System.Text;
 namespace StarshotEngine.Rendering
 {
 
-    public class ScreenspaceScaler : SceneObjectComponent
+    public class ScreenspaceScaler : global::Renderer
     {
         SceneCamera camera;
 

@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 
-public abstract class SceneObjectComponent
+public abstract class Renderer
 {
     public SceneObject sceneObject { get; private set; }
 

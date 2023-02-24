@@ -213,11 +213,11 @@ namespace StarshotEngine
         }
 
         #region Components
-        protected List<SceneObjectComponent> components = new List<SceneObjectComponent>();
+        protected List<Renderer> components = new List<Renderer>();
 
         public void AddComponent(ref Type type, SceneObjectComponentData componentData = null)
         {
-            SceneObjectComponent obj = (SceneObjectComponent)Activator.CreateInstance(type);
+            Renderer obj = (Renderer)Activator.CreateInstance(type);
             if (obj == null) return;
 
             obj.InitializeValues(this, componentData);
@@ -225,7 +225,7 @@ namespace StarshotEngine
             components.Add(obj);
         }
 
-        public T AddComponent<T>(SceneObjectComponentData componentData = null) where T : SceneObjectComponent
+        public T AddComponent<T>(SceneObjectComponentData componentData = null) where T : Renderer
         {
             T obj = Activator.CreateInstance<T>();
             if (obj == null) return null;
@@ -236,11 +236,11 @@ namespace StarshotEngine
             return obj;
         }
 
-        public SceneObjectComponent GetComponent<T>(ref T type) where T : SceneObjectComponent
+        public Renderer GetComponent<T>(ref T type) where T : Renderer
         {
             for (int i = 0; i < components.Count; i++)
             {
-                SceneObjectComponent temp = components[i];
+                Renderer temp = components[i];
                 if (temp.GetType() == type.GetType())
                 {
                     return temp;

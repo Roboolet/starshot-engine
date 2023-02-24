@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ExampleProject.Scripts
 {
-    public class Collectable : SceneObjectComponent
+    public class Collectable : Renderer
     {
         SceneObject plr;
         public float grabDist;

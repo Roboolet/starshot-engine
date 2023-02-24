@@ -10,7 +10,7 @@ using System.Text;
 
 namespace ExampleProject.Scripts
 {
-    public class PlayerScript : SceneObjectComponent
+    public class PlayerScript : Renderer
     {
         public float cameraFollowSpeed;
         public float speed;

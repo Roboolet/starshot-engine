@@ -12,7 +12,7 @@
                 {
                     "type": "StackRenderer",
                     "data": {
-                        "spritePath": "sprites\\player",
+                        "filePath": "sprites\\player",
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0.4,
                         "followCamera": true,
@@ -42,7 +42,7 @@
                 {
                     "type": "TextRenderer",
                     "data": {
-                        "fontPath": "roboto",
+                        "filePath": "roboto",
                         "content": "TextRenderer Test",
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0
@@ -66,7 +66,7 @@
                 {
                     "type": "SpriteRenderer",
                     "data": {
-                        "spritePath": "sprites\\gas",
+                        "filePath": "sprites\\gas",
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0.9
                     }
@@ -90,7 +90,7 @@
                 {
                     "type": "StackRenderer",
                     "data": {
-                        "spritePath": "sprites\\player",
+                        "filePath": "sprites\\player",
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0.4,
                         "followCamera": true,
@@ -110,7 +110,7 @@
                 {
                     "type": "StackRenderer",
                     "data": {
-                        "spritePath": "sprites\\wall",
+                        "filePath": "sprites\\wall",
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0.4,
                         "followCamera": true,
@@ -132,7 +132,7 @@
                 {
                     "type": "StackRenderer",
                     "data": {
-                        "spritePath": "sprites\\wall",
+                        "filePath": "sprites\\wall",
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0.4,
                         "followCamera": true,
@@ -154,7 +154,7 @@
                 {
                     "type": "StackRenderer",
                     "data": {
-                        "spritePath": "sprites\\wall",
+                        "filePath": "sprites\\wall",
                         "color": [ 1, 1, 1 ],
                         "drawOrder": 0.4,
                         "followCamera": true,

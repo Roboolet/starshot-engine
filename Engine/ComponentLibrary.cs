@@ -20,7 +20,7 @@ public class ComponentLibrary
         {
             Type type = types[i];
             // check if type is an implementation of SceneObjectComponent
-            if (type.IsClass && !type.IsAbstract && type.IsSubclassOf(typeof(SceneObjectComponent)))
+            if (type.IsClass && !type.IsAbstract && type.IsSubclassOf(typeof(Renderer)))
             {
                 dict.Add(type.Name, type);
                 Debug.WriteLine("Added component to library: " + type.Name);

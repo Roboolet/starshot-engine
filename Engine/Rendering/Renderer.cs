@@ -6,7 +6,7 @@ using System.Text;
 
 namespace StarshotEngine.Rendering
 {
-    public abstract class Renderer : SceneObjectComponent
+    public abstract class Renderer : global::Renderer
     {
         public string filePath;
         public float[] color;
@@ -30,7 +30,7 @@ namespace StarshotEngine.Rendering
         public void SetContent(string path)
         {
             filePath = path;
-            if (!String.IsNullOrEmpty(path)) ApplyContent(path);
+            if (!String.IsNullOrEmpty(filePath)) ApplyContent(filePath);
             else
             {
                 SetContentToFallback();

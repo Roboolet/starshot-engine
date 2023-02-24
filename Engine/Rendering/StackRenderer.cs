@@ -9,7 +9,7 @@ using System.Text;
 
 namespace StarshotEngine.Rendering
 {
-    public class StackRenderer : SpriteRenderer
+    public class StackRenderer : Renderer
     {
         public bool followCamera = false;
         public bool singleSpriteMode = false;
@@ -23,30 +23,18 @@ namespace StarshotEngine.Rendering
         List<Texture2D> sprites = new List<Texture2D>();
         public int spriteCount => sprites.Count;
 
-        protected override void OnCreate()
+        public void SetSprite(Texture2D tex)
         {
-            SetSprite(spritePath);
-            drawOrder = Math.Clamp(drawOrder, 0, 1);
-            Main.instance.currentScene.camera.AddRenderer(this);
+            sprites.Clear();
+            sprites.Add(tex);
+        }
+        public void SetSprite(List<Texture2D> tex)
+        {
+            sprites = tex;
         }
 
-        public override Texture2D GetSprite() => GetSprite(0);
-
-        public override Texture2D GetSprite(int id)
+        public override void ApplyContent(string path = "")
         {
-            if (id < sprites.Count) return sprites[id];
-            else return null;
-        }
-
-        /// <summary>
-        /// Gets all sprites that start with this path, ordered numerically
-        /// Sprites must be numbered starting from 1, the path should not contain the numbering
-        /// Only .PNG format is supported
-        /// </summary>
-        /// <param name="path"></param>
-        public override void SetSprite(string path)
-        {
-            spritePath = path;
             sprites.Clear();
 
             // duplicate a single sprite an amount of times
@@ -54,20 +42,20 @@ namespace StarshotEngine.Rendering
             {
                 try
                 {
-                    Texture2D tex = Main.instance.Content.Load<Texture2D>(spritePath);
-                    for(int i = 0; i < singleSpriteAmount; i++)
+                    Texture2D tex = Main.instance.Content.Load<Texture2D>(path);
+                    for (int i = 0; i < singleSpriteAmount; i++)
                     {
                         sprites.Add(tex);
                     }
                 }
                 catch (ContentLoadException)
                 {
-                    SetSpriteToFallback();
+                    SetContentToFallback();
                 }
             }
             // load a sequence of numbered sprites
-            else 
-            { 
+            else
+            {
                 bool unbrokenSeq = true;
                 if (path == null)
                 {
@@ -78,7 +66,7 @@ namespace StarshotEngine.Rendering
                 int i = 1;
                 while (unbrokenSeq)
                 {
-                    string seq = spritePath + i.ToString();
+                    string seq = path + i.ToString();
                     try
                     {
                         Texture2D tex = Main.instance.Content.Load<Texture2D>(seq);
@@ -95,10 +83,57 @@ namespace StarshotEngine.Rendering
             }
         }
 
-        public override void SetSprite(Texture2D tex)
+        public override void DrawToSpritebatch(SpriteBatch batch)
         {
-            sprites.Clear();
-            sprites.Add(tex);
+            // loop over each sprite in the stack
+            for (int spi = 0; spi < spriteCount; spi++)
+            {
+                // get texture 
+                Texture2D tex = sprites[spi];
+                Point offset = Point.Zero;
+
+                if (!followCamera)
+                {
+                    Vector2 vec = new Vector2(basisVector[0], basisVector[1]);
+                    offset = new Point((int)Math.Round(spi * vec.X * magnitude), (int)Math.Round(spi * vec.Y * magnitude));
+                }
+                else
+                {
+                    // render based on camera position in relation to the renderer
+                    float diffY = camera.Position.Y - sceneObject.Position.Y;
+                    float diffX = sceneObject.Position.X - camera.Position.X;
+
+                    Vector2 vec = new Vector2(Math.Clamp(diffX * magnitude * camera.pixelsPerUnit, -maximumCameraPerspective, maximumCameraPerspective),
+                        Math.Clamp(diffY * magnitude * camera.pixelsPerUnit, -maximumCameraPerspective, maximumCameraPerspective));
+
+                    offset = new Point((int)Math.Round(spi * vec.X), (int)Math.Round(spi * vec.Y));
+                }
+                RenderSingleSprite(batch, tex, offset, spi * 0.0001f);
+            }
+        }
+        public void RenderSingleSprite(SpriteBatch batch, Texture2D tex, Point positionOffset, float drawOrderOffset = 0)
+        {
+            if (tex != null)
+            {
+                // get values
+                Point screenPos = camera.WorldToScreenPos(sceneObject.Position);
+                Vector3 scale = sceneObject.Scale;
+                float ang = sceneObject.Rotation;
+
+                // scaling
+                Vector2 scaledTex = new Vector2(MathF.Round(tex.Width * scale.X), MathF.Round(tex.Height * scale.Y));
+
+                Rectangle drawRect = new Rectangle(
+                    new Point(screenPos.X + positionOffset.X, screenPos.Y + positionOffset.Y),
+                    new Point((int)scaledTex.X, (int)scaledTex.Y));
+                batch.Draw(tex, drawRect, null, GetColor(), ang, new Vector2(tex.Width / 2f, tex.Height / 2f), SpriteEffects.None, drawOrder + drawOrderOffset);
+            }
+        }
+
+        public override void SetContentToFallback()
+        {
+            Texture2D tex = Main.instance.Content.Load<Texture2D>("placeholder");
+            SetSprite(tex);
         }
 
     }
