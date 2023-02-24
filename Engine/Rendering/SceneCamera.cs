@@ -12,7 +12,7 @@ namespace StarshotEngine.Rendering
     {
         public float pixelsPerUnit = 24;
 
-        List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+        List<Renderer> renderers = new List<Renderer>();
         List<StackRenderer> stackRenderers = new List<StackRenderer>();
         List<TextRenderer> textRenderers = new List<TextRenderer>();
 
@@ -23,14 +23,14 @@ namespace StarshotEngine.Rendering
             batch.Begin(SpriteSortMode.FrontToBack, transformMatrix:matrix);
 
             // render all SpriteRenderers
-            for(int i = 0; i < renderers.Count; i++)
+            /*for(int i = 0; i < renderers.Count; i++)
             {
                 SpriteRenderer spRend = renderers[i];
 
                 // get texture 
                 Texture2D tex = spRend.GetSprite();
                 RenderSingleSprite(batch, spRend, tex, Point.Zero);
-            }
+            }*/
 
             // render all StackRenderers
             for (int i = 0; i < stackRenderers.Count; i++)
@@ -64,13 +64,10 @@ namespace StarshotEngine.Rendering
                 }
                 
             }
-            // render all TextRenderers
-            for (int i = 0; i < textRenderers.Count; i++)
+            // render all Renderers
+            for (int i = 0; i < renderers.Count; i++)
             {
-                TextRenderer trend = textRenderers[i];
-
-                RenderText(batch, trend);
-
+                renderers[i].DrawToSpritebatch(batch);
             }
 
             batch.End();
@@ -94,21 +91,6 @@ namespace StarshotEngine.Rendering
                 batch.Draw(tex, drawRect, null, spRend.GetColor(), ang, new Vector2(tex.Width / 2f, tex.Height / 2f), SpriteEffects.None, spRend.drawOrder+drawOrderOffset);
             }
         }
-
-        public void RenderText(SpriteBatch batch, TextRenderer trend)
-        {
-            if (trend.font != null)
-            {
-                Vector2 screenPos = WorldToScreenPos(trend.sceneObject.Position).ToVector2() - trend.GetAlignmentVector();
-                batch.DrawString(trend.font, trend.content, screenPos, trend.GetColor(), trend.sceneObject.Rotation, new Vector2(0.5f, 0.5f), trend.fontScale, SpriteEffects.None, trend.drawOrder);
-            }
-        }
-
-        public void AddRenderer(SpriteRenderer renderer)
-        {
-            renderers.Add(renderer);
-            Debug.WriteLine("Added SpriteRenderer to SceneCamera");
-        }
         public void AddRenderer(StackRenderer renderer)
         {
             stackRenderers.Add(renderer);
@@ -118,6 +100,11 @@ namespace StarshotEngine.Rendering
         {
             textRenderers.Add(renderer);
             Debug.WriteLine("Added TextRenderer (" + renderer.content + ") to SceneCamera");
+        }
+        public void AddRenderer(Renderer renderer)
+        {
+            renderers.Add(renderer);
+            Debug.WriteLine("Added Renderer (" + renderer.sceneObject.name + ")to SceneCamera");
         }
 
         public Point WorldToScreenPos(Vector3 vec) => WorldToScreenPos(vec.X, vec.Y);

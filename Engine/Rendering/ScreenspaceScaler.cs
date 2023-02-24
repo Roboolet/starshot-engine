@@ -6,12 +6,6 @@ using System.Text;
 
 namespace StarshotEngine.Rendering
 {
-    public enum ScreenAnchor
-    {
-        LTop, CTop, RTop,
-        LMid, CMid, RMid,
-        LBot, CBot, RBot
-    }
 
     public class ScreenspaceScaler : SceneObjectComponent
     {

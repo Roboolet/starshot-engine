@@ -18,15 +18,6 @@ namespace StarshotEngine.Rendering
 
         Texture2D sprite;
 
-        protected override void OnCreate()
-        {
-            SetSprite(spritePath);
-
-            drawOrder = Math.Clamp(drawOrder, 0, 1);
-
-            Main.instance.currentScene.camera.AddRenderer(this);
-        }
-
         public virtual void SetSprite(string path)
         {
             spritePath = path;

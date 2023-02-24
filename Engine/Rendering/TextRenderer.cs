@@ -8,7 +8,7 @@ using System.Text;
 
 namespace StarshotEngine.Rendering
 {
-    public class TextRenderer : SceneObjectComponent
+    public class TextRenderer : Renderer
     {
         public string fontPath;
         public string content;
@@ -19,13 +19,7 @@ namespace StarshotEngine.Rendering
         public float fontScale = 1;
         public string alignment = "center";
 
-        protected override void OnCreate()
-        {
-            SetFont(fontPath);
-            Main.instance.currentScene.camera.AddRenderer(this);
-        }
-
-        public void SetFont(string path)
+        public override void ApplyContent(string path = "")
         {
             fontPath = path;
             try
@@ -38,12 +32,12 @@ namespace StarshotEngine.Rendering
             {
                 // use fallback font
                 Debug.WriteLine(" !! Could not load font at: " + path);
-                SetFontToFallback();
+                SetContentToFallback();
             }
-            catch(InvalidCastException)
+            catch (InvalidCastException)
             {
                 Debug.WriteLine(" !! Could not cast file to font at: " + path);
-                SetFontToFallback();
+                SetContentToFallback();
             }
         }
 
@@ -51,33 +45,33 @@ namespace StarshotEngine.Rendering
         {
             font = _font;
         }
-        protected void SetFontToFallback()
+
+        public override void SetContentToFallback()
         {
             SpriteFont f = Main.instance.Content.Load<SpriteFont>("roboto");
             SetFont(f);
         }
 
-        public Vector2 GetAlignmentVector()
+        public override void DrawToSpritebatch(SpriteBatch batch)
+        {
+            if (font != null)
+            {
+                Vector2 screenPos = camera.WorldToScreenPos(sceneObject.Position).ToVector2() - GetAlignmentVector();
+                batch.DrawString(font, content, screenPos, GetColor(), sceneObject.Rotation, new Vector2(0.5f, 0.5f), fontScale, SpriteEffects.None, drawOrder);
+            }
+        }
+
+        Vector2 GetAlignmentVector()
         {
             switch (alignment)
             {
                 default:
-                    return font.MeasureString(content)/2;
+                    return font.MeasureString(content) / 2;
                 case "left":
                     return Vector2.Zero;
                 case "right":
                     return font.MeasureString(content);
             }
-        }
-
-
-        public Color GetColor()
-        {
-            if (color != null)
-            {
-                return new Color(color[0], color[1], color[2]);
-            }
-            else return Color.White;
         }
     }
 }
