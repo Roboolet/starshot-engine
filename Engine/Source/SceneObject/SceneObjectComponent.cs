@@ -21,7 +21,7 @@ public abstract class Renderer
             // attempt to modify variables of component using the dynamic data in the SceneObjectComponentData
             foreach (KeyValuePair<string, JToken> pair in data.data)
             {
-                // use reflection to try and get the public field or property
+                // use reflection to try and get the public field
                 FieldInfo field = this.GetType().GetField(pair.Key, BindingFlags.Public | BindingFlags.Instance);
                 if (field != null && !field.IsInitOnly)
                 {
@@ -64,7 +64,7 @@ public abstract class Renderer
                 break;
 
             // for now, assume arrays are vectors
-            // TODO: add support for int, string and byte arrays
+            // TODO: add support for any array type
             case JTokenType.Array:
                 info.SetValue(this, value.ToObject<float[]>());
                 break;
@@ -90,7 +90,7 @@ public abstract class Renderer
                 break;
 
             // for now, assume arrays are vectors
-            // TODO: add support for int, string and byte arrays
+            // TODO: add support for any array type
             case JTokenType.Array:
                 info.SetValue(this, value.ToObject<float[]>());
                 break;

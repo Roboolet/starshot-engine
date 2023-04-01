@@ -147,7 +147,7 @@
         },
         {
             "name": "Wall",
-            "position": [ 8, 18 ],
+            "position": [ 21, 4 ],
             "rotation": 0,
             "scale": [ 2, 2 ],
             "components": [
