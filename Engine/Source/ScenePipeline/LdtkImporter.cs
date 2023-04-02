@@ -11,7 +11,7 @@ namespace StarshotEngine.ScenePipeline
     {
         protected override LdtkData Read(ContentReader reader, LdtkData existingInstance)
         {
-            Debug.WriteLine("Opening LDTK file...");
+            Debug.WriteLine("Loading LDTK file...");
             return base.Read(reader, existingInstance);
         }
     }

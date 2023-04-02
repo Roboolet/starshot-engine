@@ -248,3 +248,9 @@
 /processorParam:TextureFormat=Color
 /build:sprites/wall.png
 
+#begin world.ldtk
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=StarshotEngine.ScenePipeline.LdtkImporter, ExampleProject
+/build:world.ldtk
+

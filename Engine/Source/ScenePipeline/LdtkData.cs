@@ -1,15 +1,17 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace StarshotEngine.ScenePipeline
 {
+    [System.Serializable]
     public class LdtkData
     {
         // contains all levels and their data
         public LdtkLevel[] levels;
-        public LdtkDefs[] defs;
+        public LdtkDefs defs;
 
         // version of the LDTk json
         public string jsonVersion;
@@ -20,20 +22,26 @@ namespace StarshotEngine.ScenePipeline
 
     public enum WorldLayout { Null, Free, GridVania, LinearHorizontal, LinearVertical}
 
+    [System.Serializable]
     public class LdtkLevel
     {   // unique instance identifier
         public string iid;
         // user specified name
         public string identifier;
         public LdtkLevelNeighbour[] __neighbours;
+        public LdtkLayerInstance[] layerInstances;
+        public LdtkFieldInstance[] fieldInstances;
     }
 
+    [System.Serializable]
     public class LdtkLevelNeighbour
     {
         // n e s w
         public string dir;
         public string iid;
     }
+
+    [System.Serializable]
     public class LdtkLayerInstance
     {
         // layer type : {IntGrid, Entities, Tiles, AutoLayer}
@@ -43,7 +51,7 @@ namespace StarshotEngine.ScenePipeline
         public string __identifier;
         public float __opacity;
         public int __pxTotalOffsetX, __pxTotalOffsetY;
-        public int __tilesetDefUid;
+        public Nullable<int> __tilesetDefUid;
 
         // path to source image relative to .ldtk file
         public string __tilesetRelPath;
@@ -63,6 +71,7 @@ namespace StarshotEngine.ScenePipeline
 
     }
 
+    [System.Serializable]
     public class LdtkTileInstance
     {
         // see https://ldtk.io/json/#ldtk-Tile
@@ -76,6 +85,7 @@ namespace StarshotEngine.ScenePipeline
         public int t;
     }
 
+    [System.Serializable]
     public class LdtkEntityInstance
     {
         // coordinates; [x,y] [x,y] [x,y] ....
@@ -83,7 +93,7 @@ namespace StarshotEngine.ScenePipeline
         public string __identifier;
 
         // unique identifier
-        public int iid;
+        public string iid;
         public int width, height;
 
         public string[] __tags;
@@ -91,6 +101,7 @@ namespace StarshotEngine.ScenePipeline
         public LdtkFieldInstance[] fieldInstances;
     }
 
+    [System.Serializable]
     public class LdtkFieldInstance
     {
         public string __identifier;
@@ -102,11 +113,13 @@ namespace StarshotEngine.ScenePipeline
 
     }
 
+    [System.Serializable]
     public class LdtkDefs
     {
         public LdtkDefTileset[] tilesets;
     }
 
+    [System.Serializable]
     public class LdtkDefTileset
     {
         public int uid;
@@ -119,6 +132,7 @@ namespace StarshotEngine.ScenePipeline
         public string relPath;
     }
 
+    [System.Serializable]
     public class LdtkTilesetRect {public int w, h, x, y, tilesetUid;}
 
 }
