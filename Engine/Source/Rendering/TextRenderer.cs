@@ -54,6 +54,7 @@ namespace StarshotEngine.Rendering
 
         public override void DrawToSpritebatch(SpriteBatch batch)
         {
+            if (!sceneObject.Enabled) return;
             if (font != null)
             {
                 Vector2 screenPos = camera.WorldToScreenPos(sceneObject.Position).ToVector2() - GetAlignmentVector();

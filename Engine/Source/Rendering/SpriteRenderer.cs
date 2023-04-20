@@ -34,6 +34,7 @@ namespace StarshotEngine.Rendering
 
         public override void DrawToSpritebatch(SpriteBatch batch)
         {
+            if (!sceneObject.Enabled) return;
             if (sprite != null)
             {
                 // get values

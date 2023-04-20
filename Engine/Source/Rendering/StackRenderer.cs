@@ -85,6 +85,8 @@ namespace StarshotEngine.Rendering
 
         public override void DrawToSpritebatch(SpriteBatch batch)
         {
+            if (!sceneObject.Enabled) return;
+
             // loop over each sprite in the stack
             for (int spi = 0; spi < spriteCount; spi++)
             {

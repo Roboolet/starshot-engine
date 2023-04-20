@@ -5,34 +5,7 @@
     "camRotation": 0,
     "objects": [
         {
-            "name": "Player",
-            "position": [ 0, 0 ],
-            "rotation": 0,
-            "scale": [ 2, 2 ],
-            "components": [
-                {
-                    "type": "StackRenderer",
-                    "data": {
-                        "filePath": "sprites\\player",
-                        "color": [ 1, 1, 1 ],
-                        "drawOrder": 0.4,
-                        "followCamera": true,
-                        "maximumCameraPerspective": 16,
-                        "magnitude": 0.005
-                    }
-                },
-                {
-                    "type": "PlayerScript",
-                    "data": {
-                        "speed": 20,
-                        "speedMax": 24,
-                        "cameraFollowSpeed": 5,
-                        "angSpeed": 0.0003,
-                        "angSpeedMax": 0.0025
-                    }
-                }
-            ],
-            "children": []
+            "prefabID": "PlayerCar"
         },
         {
             "name": "UI_pickups",

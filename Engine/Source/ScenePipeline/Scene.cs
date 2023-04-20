@@ -50,7 +50,7 @@ namespace StarshotEngine.ScenePipeline
             // create SceneObjects and components
             for(int i = 0; i < source.objects.Length; i++)
             {
-                new SceneObject(root, source.objects[i]);
+                new SceneObject(root, source.objects[i]).AddToScene(this);
             }
 
             // call OnStart

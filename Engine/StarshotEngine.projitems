@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Source\Rendering\ScreenspaceScaler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Rendering\StackRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Rendering\TextRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\SceneObject\PrefabLibrary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\SceneObject\SceneObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Main.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Rendering\SpriteRenderer.cs" />
@@ -23,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Source\Rendering\SceneCamera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\SceneObject\SceneObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\ScenePipeline\SceneData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\ScenePipeline\PrefabImporter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\ScenePipeline\SceneImporter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Tilemaps\Tilemap.cs" />
   </ItemGroup>

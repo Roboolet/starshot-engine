@@ -103,10 +103,8 @@ namespace StarshotEngine
         {
             name = _name;
             parent = _parent;
-            Enabled = true;
 
-            scene = Main.instance.currentScene;
-            scene.AddSceneObject(this);
+            AddToScene();
         }
 
         /// <summary>
@@ -116,23 +114,29 @@ namespace StarshotEngine
         public SceneObject(SceneObject _parent, SceneObjectData _data)
         {
             parent = _parent;
-            scene = Main.instance.currentScene;
+            SceneObjectData comData = _data;
+            
+            // instantiate as prefab (if appliccable)
+            if(!string.IsNullOrEmpty(_data.prefabID) && PrefabLibrary.PrefabExists(_data.prefabID))
+            {
+                comData = PrefabLibrary.CombineObjects(_data, _data.prefabID);
+            }
 
             // set name
-            name = _data.name;
+            name = comData.name;
             Debug.WriteLine(" ++ Creating SceneObject: " + name);
 
             // PRS
-            Position = new Vector3( _data.position[0], _data.position[1], 0);
-            Rotation = _data.rotation;
-            Scale = new Vector3(_data.scale[0], _data.scale[1], 1);
+            if(comData.position != null) Position = new Vector3( comData.position[0], comData.position[1], 0);
+            Rotation = comData.rotation;
+            if (comData.scale != null) Scale = new Vector3(comData.scale[0], comData.scale[1], 1);
 
             // create components
-            if (_data.components != null)
+            if (comData.components != null)
             {
-                for (int i = 0; i < _data.components.Length; i++)
+                for (int i = 0; i < comData.components.Length; i++)
                 {
-                    SceneObjectComponentData socd = _data.components[i];
+                    SceneObjectComponentData socd = comData.components[i];
                     Debug.WriteLine(" ++ Adding component: " + socd.type);
                     Type compType = ComponentLibrary.GetComponentType(socd.type);
 
@@ -145,19 +149,33 @@ namespace StarshotEngine
             }
 
             // create children
-            if (_data.children != null)
+            if (comData.children != null)
             {
-                children = new List<SceneObject>();
-                for (int i = 0; i < _data.children.Length; i++)
+                for (int i = 0; i < comData.children.Length; i++)
                 {
-                    children.Add(new SceneObject(this, _data.children[i]));
+                    children.Add(new SceneObject(this, comData.children[i]));
                 }
             }
+        }
 
+        public void AddToScene(Scene _scene = null)
+        {
+            // add to scene
             Enabled = true;
 
-            // add to scene
+            if (_scene == null)
+            {
+                scene = Main.instance.currentScene;
+            }
+            else scene = _scene;
+
             scene.AddSceneObject(this);
+
+            // add all children too
+            for(int i=0; i < children.Count; i++)
+            {
+                children[i].AddToScene(scene);
+            }
         }
 
         public void Start()
