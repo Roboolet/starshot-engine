@@ -70,10 +70,5 @@ namespace StarshotEngine
             currentScene = new Scene(Content.Load<SceneData>(name));
             currentScene.Populate();
         }
-
-        public void LoadLdtk(string name)
-        {
-
-        }
     }
 }

@@ -9,7 +9,6 @@ namespace StarshotEngine.ScenePipeline
     [System.Serializable]
     public class SceneData
     {
-        public string ldtk;
         public string name;
         public float[] camPosition;
         public float camRotation;

@@ -18,8 +18,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Source\SceneObject\SceneObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Main.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Rendering\SpriteRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Source\ScenePipeline\LdtkData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Source\ScenePipeline\LdtkImporter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\ScenePipeline\Scene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Rendering\SceneCamera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\SceneObject\SceneObject.cs" />

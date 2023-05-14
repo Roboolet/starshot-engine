@@ -11,7 +11,6 @@ namespace StarshotEngine.ScenePipeline
     {
         public readonly string name;
         protected readonly SceneData source;
-        protected readonly LdtkData ldtk;
         public SceneCamera camera;
 
         public SceneObject root { get; private set; }
@@ -22,12 +21,6 @@ namespace StarshotEngine.ScenePipeline
         {
             source = _source;
             name = _source.name;
-
-            // if ldtk file exists, load that
-            if (!string.IsNullOrEmpty(source.ldtk))
-            {
-                ldtk = Main.instance.Content.Load<LdtkData>(source.ldtk);
-            }
         }
 
         bool isPopulated = false;
@@ -45,7 +38,6 @@ namespace StarshotEngine.ScenePipeline
             camera = new SceneCamera();
             camera.Position = new Vector3(source.camPosition[0], source.camPosition[1], 0);
             camera.Rotation = source.camRotation;
-
 
             // create SceneObjects and components
             for(int i = 0; i < source.objects.Length; i++)

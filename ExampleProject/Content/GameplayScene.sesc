@@ -1,7 +1,6 @@
 {
-    "ldtk": "world",
     "name": "GameplayScene",
-    "camPosition": [ 0, 0 ],
+    "camPosition": [ 0, 0],
     "camRotation": 0,
     "objects": [
         {
@@ -25,7 +24,7 @@
                 {
                     "type": "ScreenspaceScaler",
                     "data": {
-                        "anchor": [ 0.5, 0.1 ]
+                        "anchor": [0.5,0.1]
                     }
                 }
             ],
