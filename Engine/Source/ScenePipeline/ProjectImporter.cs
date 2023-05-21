@@ -7,11 +7,10 @@ using Newtonsoft.Json;
 
 namespace StarshotEngine.ScenePipeline
 {
-    class SceneImporter : JsonContentTypeReader<SceneData>
+    class ProjectImporter : JsonContentTypeReader<ProjectData>
     {
-        protected override SceneData Read(ContentReader reader, SceneData existingInstance)
+        protected override ProjectData Read(ContentReader reader, ProjectData existingInstance)
         {
-            Debug.WriteLine("Opening Scene file...");
             return base.Read(reader, existingInstance);
         }
     }

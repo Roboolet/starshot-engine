@@ -7,6 +7,18 @@ using System.Text;
 namespace StarshotEngine.ScenePipeline
 {
     [System.Serializable]
+    public class ProjectData
+    {
+        public string projectName;
+        // the name of the application when it's running
+        public string programName;
+
+        public SceneData[] scenes;
+        public SceneObjectData[] prefabs;
+        // add sprite stacks here too
+    }
+
+    [System.Serializable]
     public class SceneData
     {
         public string name;

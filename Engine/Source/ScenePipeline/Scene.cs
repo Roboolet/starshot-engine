@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using StarshotEngine.Rendering;
+using StarshotEngine.ScenePipeline;
 
 namespace StarshotEngine.ScenePipeline
 {

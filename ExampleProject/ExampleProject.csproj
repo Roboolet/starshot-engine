@@ -10,14 +10,14 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Content\GameplayScene.sesc" />
-    <None Remove="Content\prefabs\PlayerCar.sepf" />
-    <None Remove="Icon.ico" />
-    <None Remove="Icon.bmp" />
+    <Compile Remove="Content\prefabs\**" />
+    <EmbeddedResource Remove="Content\prefabs\**" />
+    <None Remove="Content\prefabs\**" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\GameplayScene.sesc" />
-    <Content Include="Content\prefabs\PlayerCar.sepf" />
+    <None Remove="Content\GameplayScene.sesc" />
+    <None Remove="Icon.ico" />
+    <None Remove="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />

@@ -9,7 +9,7 @@
     <Import_RootNamespace>StarshotEngine</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Source\SceneObject\ComponentLibrary.cs" />
+    <Compile Include="..\Engine\Source\SceneObject\ComponentClassLibrary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Rendering\Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Rendering\ScreenspaceScaler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Rendering\StackRenderer.cs" />
@@ -21,9 +21,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Source\ScenePipeline\Scene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Rendering\SceneCamera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\SceneObject\SceneObject.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Source\ScenePipeline\SceneData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Source\ScenePipeline\PrefabImporter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Source\ScenePipeline\SceneImporter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\ScenePipeline\ProjectData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\ScenePipeline\ProjectImporter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Tilemaps\Tilemap.cs" />
   </ItemGroup>
   <ItemGroup>

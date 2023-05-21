@@ -49,8 +49,19 @@ namespace StarshotEngine
             if (TryGetPrefab(prefabID, out SceneObjectData pf))
             {
                 SceneObjectData copy = original;
-                copy.children = copy.children.Concat(pf.children).ToArray();
-                copy.components = copy.components.Concat(pf.components).ToArray();
+
+                // combine children into one object
+                if (copy.children == null) copy.children = pf.children;
+                else
+                {
+                    copy.children = copy.children.Concat(pf.children).ToArray();
+                }
+                // do the same with components
+                if (copy.components == null) copy.components = pf.components;
+                else
+                {
+                    copy.components = copy.components.Concat(pf.components).ToArray();
+                }
                 return copy;
             }
             return original;

@@ -1,0 +1,87 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbylbsyoevq1n"]
+
+[ext_resource type="Script" path="res://TabBarSwitcher.gd" id="1_gyke3"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gyke3")
+
+[node name="Tab_Project" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Tab_Project"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Open
+"
+
+[node name="Tab_Scene" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tab_Prefabs" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tab_Sprites" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Toolbar" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="TabBar" type="TabBar" parent="Toolbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+clip_tabs = false
+scrolling_enabled = false
+scroll_to_selected = false
+tab_count = 4
+tab_0/title = "Project"
+tab_1/title = "Scene"
+tab_2/title = "Prefabs"
+tab_3/title = "Spriting"
+
+[connection signal="tab_changed" from="Toolbar/TabBar" to="." method="_on_tab_changed"]

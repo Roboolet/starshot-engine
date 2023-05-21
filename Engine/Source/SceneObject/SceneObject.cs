@@ -138,7 +138,7 @@ namespace StarshotEngine
                 {
                     SceneObjectComponentData socd = comData.components[i];
                     Debug.WriteLine(" ++ Adding component: " + socd.type);
-                    Type compType = ComponentLibrary.GetComponentType(socd.type);
+                    Type compType = ComponentClassLibrary.GetComponentType(socd.type);
 
                     if (compType != null)
                     {

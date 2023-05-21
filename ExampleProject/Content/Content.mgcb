@@ -14,17 +14,11 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin GameplayScene.sesc
+#begin game.seproj
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
-/processorParam:ContentType=StarshotEngine.ScenePipeline.SceneImporter, ExampleProject
-/build:GameplayScene.sesc
-
-#begin prefabs/PlayerCar.sepf
-/importer:JsonContentImporter
-/processor:JsonContentProcessor
-/processorParam:ContentType=StarshotEngine.ScenePipeline.PrefabImporter, ExampleProject
-/build:prefabs/PlayerCar.sepf
+/processorParam:ContentType=StarshotEngine.ScenePipeline.ProjectImporter, ExampleProject
+/build:game.seproj
 
 #begin sprites/gas.png
 /importer:TextureImporter
